@@ -1,13 +1,3 @@
-# [Start Bootstrap - Grayscale](https://startbootstrap.com/themes/grayscale/)
-
-[Grayscale](https://startbootstrap.com/themes/grayscale/) is a multipurpose, one page HTML theme for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
-
-## Preview
-
-[![Grayscale Preview](https://startbootstrap.com/assets/img/screenshots/themes/grayscale.png)](https://startbootstrap.github.io/startbootstrap-grayscale/)
-
-**[View Live Preview](https://startbootstrap.github.io/startbootstrap-grayscale/)**
-
 ## Status
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-grayscale/master/LICENSE)
@@ -15,15 +5,6 @@
 [![Build Status](https://travis-ci.org/StartBootstrap/startbootstrap-grayscale.svg?branch=master)](https://travis-ci.org/StartBootstrap/startbootstrap-grayscale)
 [![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-grayscale/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-grayscale)
 [![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-grayscale/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-grayscale?type=dev)
-
-## Download and Installation
-
-To begin using this template, choose one of the following options to get started:
-
-- [Download the latest release on Start Bootstrap](https://startbootstrap.com/themes/grayscale/)
-- Install using npm: `npm i startbootstrap-grayscale`
-- Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-grayscale.git`
-- [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-grayscale)
 
 ## Usage
 
