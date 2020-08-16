@@ -1,158 +1,281 @@
 doctype html
-html(lang='en')
-
-    head
-
-        meta(charset='utf-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-        meta(name='description', content='')
-        meta(name='author', content='')
-
-        title Grayscale - Start Bootstrap Theme
-
-        link(rel='icon', type='image/x-icon', href='assets/img/favicon.ico')
-
-        // Font Awesome icons (free version)
-        script(src='https://use.fontawesome.com/releases/v5.13.0/js/all.js', crossorigin='anonymous')
-
-        // Google fonts
-        link(href='https://fonts.googleapis.com/css?family=Varela+Round', rel='stylesheet')
-        link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i', rel='stylesheet')
-
-        // Core theme CSS (includes Bootstrap)
-        link(href='css/styles.css', rel='stylesheet')
-
-    body#page-top
-
-        // Navigation
-        nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
-            .container
-                a.navbar-brand.js-scroll-trigger(href='#page-top') Start Bootstrap
-                button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
-                    | Menu
-                    i.fas.fa-bars
-                #navbarResponsive.collapse.navbar-collapse
-                    ul.navbar-nav.ml-auto
-                        li.nav-item
-                            a.nav-link.js-scroll-trigger(href='#about') About
-                        li.nav-item
-                            a.nav-link.js-scroll-trigger(href='#projects') Projects
-                        li.nav-item
-                            a.nav-link.js-scroll-trigger(href='#signup') Contact
-
-        // Masthead
-        header.masthead
-            .container.d-flex.h-100.align-items-center
-                .mx-auto.text-center
-                    h1.mx-auto.my-0.text-uppercase Grayscale
-                    h2.text-white-50.mx-auto.mt-2.mb-5 A free, responsive, one page Bootstrap theme created by Start Bootstrap.
-                    a.btn.btn-primary.js-scroll-trigger(href='#about') Get Started
-
-        // About
-        section#about.about-section.text-center
-            .container
-                .row
-                    .col-lg-8.mx-auto
-                        h2.text-white.mb-4 Built with Bootstrap 4
-                        p.text-white-50
-                            | Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on 
-                            a(href='https://startbootstrap.com/template-overviews/grayscale/') the preview page
-                            | . The theme is open source, and you can use it for any purpose, personal or commercial.
-                img.img-fluid(src='assets/img/ipad.png', alt='')
-
-        // Projects
-        section#projects.projects-section.bg-light
-            .container
-                // Featured Project Row
-                .row.align-items-center.no-gutters.mb-4.mb-lg-5
-                    .col-xl-8.col-lg-7
-                        img.img-fluid.mb-3.mb-lg-0(src='assets/img/bg-masthead.jpg', alt='')
-                    .col-xl-4.col-lg-5
-                        .featured-text.text-center.text-lg-left
-                            h4 Shoreline
-                            p.text-black-50.mb-0
-                                | Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!
-                // Project One Row
-                .row.justify-content-center.no-gutters.mb-5.mb-lg-0
-                    .col-lg-6
-                        img.img-fluid(src='assets/img/demo-image-01.jpg', alt='')
-                    .col-lg-6
-                        .bg-black.text-center.h-100.project
-                            .d-flex.h-100
-                                .project-text.w-100.my-auto.text-center.text-lg-left
-                                    h4.text-white Misty
-                                    p.mb-0.text-white-50
-                                        | An example of where you can put an image of a project, or anything else, along with a description.
-                                    hr.d-none.d-lg-block.mb-0.ml-0
-                // Project Two Row
-                .row.justify-content-center.no-gutters
-                    .col-lg-6
-                        img.img-fluid(src='assets/img/demo-image-02.jpg', alt='')
-                    .col-lg-6.order-lg-first
-                        .bg-black.text-center.h-100.project
-                            .d-flex.h-100
-                                .project-text.w-100.my-auto.text-center.text-lg-right
-                                    h4.text-white Mountains
-                                    p.mb-0.text-white-50
-                                        | Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!
-                                    hr.d-none.d-lg-block.mb-0.mr-0
-
-        // Signup
-        section#signup.signup-section
-            .container
-                .row
-                    .col-md-10.col-lg-8.mx-auto.text-center
-                        i.far.fa-paper-plane.fa-2x.mb-2.text-white
-                        h2.text-white.mb-5 Subscribe to receive updates!
-                        form.form-inline.d-flex
-                            input#inputEmail.form-control.flex-fill.mr-0.mr-sm-2.mb-3.mb-sm-0(type='email', placeholder='Enter email address...')
-                            button.btn.btn-primary.mx-auto(type='submit') Subscribe
-
-        // Contact
-        section.contact-section.bg-black
-            .container
-                .row
-                    .col-md-4.mb-3.mb-md-0
-                        .card.py-4.h-100
-                            .card-body.text-center
-                                i.fas.fa-map-marked-alt.text-primary.mb-2
-                                h4.text-uppercase.m-0 Address
-                                hr.my-4
-                                .small.text-black-50 4923 Market Street, Orlando FL
-                    .col-md-4.mb-3.mb-md-0
-                        .card.py-4.h-100
-                            .card-body.text-center
-                                i.fas.fa-envelope.text-primary.mb-2
-                                h4.text-uppercase.m-0 Email
-                                hr.my-4
-                                .small.text-black-50
-                                    a(href='#!') hello@yourdomain.com
-                    .col-md-4.mb-3.mb-md-0
-                        .card.py-4.h-100
-                            .card-body.text-center
-                                i.fas.fa-mobile-alt.text-primary.mb-2
-                                h4.text-uppercase.m-0 Phone
-                                hr.my-4
-                                .small.text-black-50 +1 (555) 902-8832
-                .social.d-flex.justify-content-center
-                    a.mx-2(href='#!')
-                        i.fab.fa-twitter
-                    a.mx-2(href='#!')
-                        i.fab.fa-facebook-f
-                    a.mx-2(href='#!')
-                        i.fab.fa-github
-
-        // Footer
-        footer.footer.bg-black.small.text-center.text-white-50
-            .container
-                | Copyright © Your Website 2020
-
-        // Bootstrap core JS
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
-        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js')
-
-        // Third party plugin JS
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js')
-
-        // Core theme JS
-        script(src='js/scripts.js')
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description' content='mechanical engineering PhD student')
+  meta(name='author' content='Yu-Chin Chan')
+  title Yu-Chin Chan
+  link(rel='icon' type='image/x-icon' href='assets/img/favicon.ico')
+  // Font Awesome icons (free version)
+  script(src='https://use.fontawesome.com/releases/v5.13.0/js/all.js' crossorigin='anonymous')
+  // Google fonts
+  link(href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700')
+  // Core theme CSS (includes Bootstrap)
+  link(href='css/styles.css' rel='stylesheet')
+// Navigation
+nav#mainNav.navbar.navbar-expand-lg.navbar-expand-md.navbar-light.fixed-top
+  .container
+    a.navbar-brand.js-scroll-trigger(href='#page-top') HOME
+    button.navbar-toggler.navbar-toggler-right(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+      i.fas.fa-bars
+    #navbarResponsive.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link.js-scroll-trigger(href='#about') about
+        li.nav-item
+          a.nav-link.js-scroll-trigger(href='#pubs') publications
+        li.nav-item
+          a.nav-link.js-scroll-trigger(href='#projects') projects
+        li.nav-item
+          a.nav-link.js-scroll-trigger(href='#foot') links
+// Masthead
+header.masthead
+  #header-container.container.d-flex.h-100.align-items-center
+    .mx-auto.text-center
+      h1.mx-auto.my-0.text-uppercase Yu-Chin Chan
+      h2.text-white-50.mx-auto.mt-4.mb-4 data-driven metamaterials design, deep learning,&nbsp;statistical design optimization
+      a.btn.btn-link.js-scroll-trigger(href='#about')
+        i.fa.fa-angle-down
+// About
+section#about.about-section.text-center.bg-black
+  .container
+    .row
+      .col.my-0
+        #cv-summary.sticky-top
+          img#avatar.rounded-circle.img-fluid(src='assets/img/IMG_20180924_224211_907.jpg')
+          h2 About Yu-Chin
+          .men
+            div
+              a.btn.men-but(data-toggle='collapse' aria-expanded='false' aria-controls='collapse-1' href='#collapse-1' role='button') Go to...
+              #collapse-1.collapse.text-uppercase
+                p
+                  a.men-link.js-scroll-trigger(href='#interests') Interests
+                p
+                  a.men-link.js-scroll-trigger(href='#edu') Education
+                p
+                  a.men-link.js-scroll-trigger(href='#awards') Awards
+                p
+                  a.men-link.js-scroll-trigger(href='#exp') Experience
+                p
+                  a.men-link.js-scroll-trigger(href='#talks') Talks
+                p
+                  a.men-link.js-scroll-trigger(href='#pubs') Publications
+      #cv-main.col-lg-8.mx-auto
+        p.text-justify.men-par
+          | I am a Ph.D. student at Northwestern University in the 
+          a(href='https://ideal.mech.northwestern.edu/' target='_blank') IDEAL
+          |  group.
+          |                     My interests are an interdisciplinary mix of engineering design, computer vision and graphics, mechanics and materials science, especially applied to metamaterials and additive manufacturing.
+        p.text-justify.men-par
+          | (This site is under construction. Please see my 
+          a(href='https://www.linkedin.com/in/lychan/' target='_blank') LinkedIn
+          |  for more complete information.)
+        // Education Sub-Section
+        #edu.cv-left.justify-content-center.text-left.no-gutters
+          h4 Education
+          .card-deck
+            .card
+              .card-body.text-left
+                h6 North Carolina State University
+                .small.text-white-50
+                  | B.S. Mechanical Engineering (Honors)
+                  br
+                  | 2011 - 2015
+                  br
+                  | Minor Mathematics
+                  br
+                  | Summa Cum Laude
+            .card
+              .card-body.text-left
+                h6 Northwestern University
+                .small.text-white-50
+                  | Ph.D. Mechanical Engineering
+                  br
+                  | 2016 - (2021)
+                  br
+                  | Advisor: Prof. Wei Chen
+        // Awards Sub-Section
+        #awards.cv-right.justify-content-center.text-right.no-gutters
+          h4 Awards
+          .card-deck
+            .card
+              .card-body.text-right
+                h6 Paper of Distinction for [Chan, Y. et al., 2020]
+                .small.text-white-50
+                  | Design Automation Conference at ASME IDETC/CIE,
+                  br
+                  | August 2020
+            .card
+              .card-body.text-right
+                h6 Graduate Research Fellowship
+                .small.text-white-50
+                  | National Science Foundation,
+                  br
+                  | April 2018
+            .card
+              .card-body.text-right
+                h6 Predictive Science &amp; Engineering Design Fellowship
+                .small.text-white-50
+                  | Northwestern University,
+                  br
+                  | August 2017
+            .card
+              .card-body.text-right
+                h6 Paper of Distinction [Tao, S. et al., 2017]
+                .small.text-white-50
+                  | Design Automation Conference at ASME IDETC/CIE,
+                  br
+                  | August 2017
+            .card
+              .card-body.text-right
+                h6 Walter P. Murphy Fellowship
+                .small.text-white-50
+                  | Northwestern University,
+                  br
+                  | September 2016
+        // Experience Sub-Section
+        #exp.pubs-section.cv-left.justify-content-center.text-left.no-gutters
+          h4 Experience
+          ul
+            li
+              h6 Generative Design Intern (Siemens Corporate Technology)
+              .small.text-white-50
+                | June - September 2018
+                br
+                |                           Accelerated topology optimization for large-scale industrial problems (US Patent Pending); implemented as Python software.
+        // Talks Sub-Section
+        #talks.pubs-section.cv-right.justify-content-center.text-left.no-gutters
+          h4 Talks
+          ul
+            li
+              h6
+                | METASET: An Automated Data Selection Method for Scalable Data-Driven Design of Metamaterials
+              .small.text-white-50
+                em Design Automation Conference at ASME IDETC/CIE
+                | ,August 18, 2020.
+            li
+              h6
+                | A Spectral Shape Descriptor Based Approach for Data-Driven Metamaterials Design Optimization
+              .small.text-white-50
+                em 15th U.S. National Congress on Computational Mechanics
+                | , Austin, TX, July 29, 2019.
+        // Publications Sub-Section
+        #pubs.pubs-section.cv-left.justify-content-center.text-left.no-gutters
+          h4 Publications
+          .bibtex_structure
+            .sort.year(extra='DESC number')
+              .templates
+          #bibtex_display
+            .if.bibtex_template(style='display: none;')
+              ul
+                li
+                  .if.url
+                    a.bibtexVar(href='+URL+' target='_blank' extra='url')
+                      h6
+                        span.title
+                  .if(class='!url')
+                    .if.doi
+                      a.bibtexVar(href='http://dx.doi.org/+DOI+' target='_blank' extra='doi')
+                        h6
+                          span.title
+                    .if(class='!doi')
+                      h6
+                        span.title
+                  .small.text-white-50
+                    span.author(max='4')
+                      span.last
+                      span.first_initial , 
+                    | ,
+                    span.if.journal
+                      em
+                        span.journal
+                      | ,
+                    span.if.booktitle
+                      | In 
+                      em
+                        span.booktitle
+                      | ,
+                    span.if.institution
+                      span.institution
+                      | ,
+                    span.if.volume
+                      span.volume
+                      | ,
+                    span.if.journal.number
+                      | (
+                      span.number
+                      | ),
+                    span.if.month
+                      span.month
+                      | ,
+                    span.if.year
+                      span.year
+                      | .
+                    span.if.note
+                      span.note
+                      | .
+// Projects
+section#projects.projects-section.bg-black
+  .container
+    h4 Projects
+    // Project One Row
+    .row.justify-content-center.no-gutters.mb-5.mb-lg-0
+      .col-lg-6
+        img.img-fluid(src='assets/img/mesh_bg_1.png' alt='')
+      .col-lg-6
+        .bg-black.text-center.h-100.project
+          .d-flex.h-100
+            .project-text.w-100.my-auto.text-center.text-lg-left
+              h4.text-white Data-Driven Metamaterials Design
+              p.mb-0.text-white-50
+                | Data-driven design and topology optimization of multi-scale metamaterials using deep learning and reduced geometric representations.
+              hr.d-none.d-lg-block.mb-0.ml-0
+    // Project Two Row
+    //
+      <div class="row justify-content-center no-gutters">
+      <div class="col-lg-6">
+      <img class="img-fluid" src="img/mesh_bg_1.png" alt="">
+      </div>
+      <div class="col-lg-6 order-lg-first">
+      <div class="bg-black text-center h-100 project">
+      <div class="d-flex h-100">
+      <div class="project-text w-100 my-auto text-center text-lg-right">
+      <h4 class="text-white">Machine Learning for Metal Manufacturing</h4>
+      <p class="mb-0 text-white-50">Data-driven prediction of process-microstructure-property-performance relationships for cast or additively manufactured metals.</p>
+      <hr class="d-none d-lg-block mb-0 mr-0">
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+// Footer
+#foot.footer-dark
+  .container
+    .row
+      .col.item.social
+        a(data-bs-hover-animate='swing' href='https://www.linkedin.com/in/lychan/' target='_blank')
+          i.fab.fa-linkedin
+        a(data-bs-hover-animate='swing' href='https://scholar.google.com/citations?user=ZK2gpWYAAAAJ&hl=en' target='_blank')
+          i.fas.fa-graduation-cap
+        a(data-bs-hover-animate='swing' href='https://ideal.mech.northwestern.edu/' target='_blank')
+          i.fas.fa-building
+        a(data-bs-hover-animate='swing' href='https://github.com/lychan110' target='_blank')
+          i.fab.fa-github
+    p.copyright &copy; Yu-Chin Chan 2020
+// Bootstrap core JS
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js')
+// Third party plugin JS
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js')
+// Core theme JS
+script(src='js/scripts.js')
+// Custom scripts for this template
+// <script src="js/grayscale.min.js"></script>
+script(src='js/custom_cv.js')
+script(src='js/bs-animation.js')
+script(type='text/javascript' src='https://cdn.rawgit.com/pcooksey/bibtex-js/5ccf967/src/bibtex_js.js')
+bibtex(src='assets/ychan_pubs.bib')
