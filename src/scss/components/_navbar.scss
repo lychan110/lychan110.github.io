@@ -1,35 +1,51 @@
 #mainNav {
-    min-height: 3.5rem;
-    background-color: $white;
+    // min-height: 3.5rem;
+    background-color: $black;
+    text-transform: uppercase;
     .navbar-toggler {
         font-size: 80%;
         padding: 0.75rem;
-        color: $primary;
-        border: $border-width solid $primary;
+        color: $white;
+        border: 1px solid $white;
         &:focus {
             outline: none;
         }
     }
     .navbar-brand {
-        color: $black;
-        font-weight: 700;
-        padding: 0.9rem 0;
-    }
+        color: $white;
+        font-weight: 800;
+        padding: .5rem 0;
+        }
     .navbar-nav {
-        .nav-item {
+        .nav-link {
+            font-weight: 500;
+            color: fade-out($white, .4);
             &:hover {
-                color: fade($white, 80%);
-                outline: none;
-                background-color: transparent;
+              color: $white; //fade($white, 80%);
+              outline: none;
+              background-color: transparent;
             }
             &:active,
             &:focus {
-                outline: none;
-                background-color: transparent;
+              outline: none;
+              background-color: transparent;
             }
-        }
+          }      
+        // .nav-item {
+        //     &:hover {
+        //         color: fade($white, 80%);
+        //         outline: none;
+        //         background-color: transparent;
+        //     }
+        //     &:active,
+        //     &:focus {
+        //         outline: none;
+        //         background-color: transparent;
+        //     }
+        // }
     }
     @include media-breakpoint-up(lg) {
+    // @media (min-width: 768px) {
         padding-top: 0;
         padding-bottom: 0;
         border-bottom: none;
@@ -42,21 +58,21 @@
         .nav-link {
             transition: none;
             padding: 2rem 1.5rem;
-            color: fade-out($white, 0.5);
+            color: fade-out($white, .4);
             &:hover {
-                color: fade-out($white, 0.25);
+              color: fade-out($white, .2);
             }
             &:active {
-                color: $white;
+              color: $white;
             }
-        }
-        &.navbar-shrink {
-            background-color: $white;
+          }
+          &.navbar-shrink {
+            background-color: $black;
             .navbar-brand {
-                color: $black;
+              color: $white;
             }
             .nav-link {
-                color: $black;
+                color: $white;
                 padding: 1.5rem 1.5rem 1.25rem;
                 border-bottom: 0.25rem solid transparent;
                 &:hover {
@@ -68,8 +84,11 @@
                 &.active {
                     color: $primary;
                     outline: none;
-                    border-bottom: 0.25rem solid $primary;
+                    // border-bottom: 0.25rem solid $primary;
                 }
+                &:focus {
+                    outline: none;
+                  }          
             }
         }
     }

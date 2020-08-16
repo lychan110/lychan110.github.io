@@ -1,10 +1,15 @@
 .projects-section {
-    padding: 10rem 0;
+    padding: 4rem 0;
+    h4 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
     .featured-text {
-        padding: 2rem;
-        @include media-breakpoint-up(lg) {
-            padding: 0 0 0 2rem;
-            border-left: 0.5rem solid $primary;
+    padding: 2rem;
+    @include media-breakpoint-up(lg) {
+        padding: 0 0 0 2rem;
+        border-left: 0.5rem solid $primary;
         }
     }
     .project-text {

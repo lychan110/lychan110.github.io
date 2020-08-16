@@ -1,12 +1,106 @@
 .about-section {
-    padding-top: 10rem;
+    padding-top: 1.6rem;//10rem;
     background: linear-gradient(
         to bottom,
         $black 0%,
         #{fade-out($black, 0.1)} 75%,
         #{fade-out($black, 0.2)} 100%
     );
-    p {
-        margin-bottom: 5rem;
+    #avatar {
+        width: 14rem;
+        padding-top: 1.6rem;
+        // padding: 0.9rem;
+        margin-bottom: 1.6rem;
+      }
+      #cv-main {
+        margin-top: 1.6rem;
+      }
+      p {
+        margin-bottom: 0.5rem;
+      }
+      h2 {
+        margin: 0rem;
+        margin-bottom: 1.6rem;
+      }
+      h4 {
+        margin-bottom: 0.5rem;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      .men-par {
+        margin-bottom: 0.5rem; //-10px;
+        // padding-bottom: 2px;
+      }
+      .men-link {
+        display: block;
+        color: $primary;
+        background: transparent;
+        text-decoration: none;
+        text-align: center;
+      }
+      .men-link.focus, .men-link:focus {
+        outline: none;
+      }
+    .btn.btn-primary.men-but {
+        display: block;
+      }
+      .btn.focus, .btn:focus {
+        outline: 0;
+        box-shadow: none;
+      }
+      .men-but {
+        border: 0.6px solid $primary;
+        background-color: transparent;
+        color: $primary;
+        margin: 0.5rem;
+        margin-top: 0rem;
+      }
+      .cv-left, .cv-right {
+        margin-top: 4rem;
+        padding: 0 1.5rem;
+      }
+      .cv-left {
+        border-left: 0.25rem solid $primary;
+      }
+      .cv-right {
+        border-right: 0.25rem solid $primary;
+      }
+      hr {
+        border-color: $primary;
+        border-width: .25rem;
+        width: 30%;
+      }
+      ul li {
+        padding: 0.25rem 0;
+      }
+      .card {
+        min-width: 20rem;
+        // -ms-flex-direction: column;
+        // flex-direction: column;
+        hr {
+          border-color: $white;
+          border-width: .05rem;
+          width: 30%;
+        }
+        h6 {
+          font-weight: 600;
+        }
+      }
+      .card-body {
+        padding: 0.5rem 0;
+      }
     }
-}
+    @media (min-width: 992px) {
+        .men-but {
+          display: none;
+        }
+        .collapse:not(.show) {
+          display: block;
+        }
+    }
+    @media (max-width: 991px) {
+        .collapse:not(.show) {
+            display: none;
+        }
+    }
+      

@@ -2,4 +2,37 @@
 
 body {
     letter-spacing: $base-letter-spacing;
+    color: $white;
 }
+
+a {
+    color: $primary;
+    &:focus,
+    &:hover {
+      text-decoration: none;
+      color: darken($primary, 20%);
+      outline: none;
+    }
+  }
+  
+  .bg-black {
+    background-color: $black !important;
+  }
+  
+  .bg-primary {
+    background-color: $primary !important;
+  }
+  
+  .text-primary {
+    color: $primary !important;
+  }
+  
+  .card {
+    background-color: transparent;
+    // border: 0.05rem solid $primary;
+  }
+  
+  footer {
+    padding: 5rem 0;
+  }
+  

@@ -1,0 +1,15 @@
+.pubs-section {
+    // padding-top: 5rem;
+    a {
+        color: $white;
+        &:focus,
+        &:hover {
+            text-decoration: none;
+            color: $primary;
+            outline: none;
+        }
+    }
+    ul {
+        padding-left: 1rem;
+    }
+}
