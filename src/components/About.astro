@@ -68,11 +68,11 @@ const { recentProjects = [] } = Astro.props;
                 </span>
             </div>
             <!-- Caption -->
-            <div class="flex justify-between mt-2">
-                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
+            <div class="flex flex-col gap-[2px] md:flex-row md:justify-between mt-2 overflow-hidden">
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60 truncate">
                     Fig. 1 — Y.C.
                 </span>
-                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60 truncate">
                     Grandfather Mtn, NC
                 </span>
             </div>
@@ -203,6 +203,35 @@ const { recentProjects = [] } = Astro.props;
         <span class="kicker">§ 01 / 04</span>
     </div>
 
+    <!-- Experience rows -->
+    {experience.map(ex => {
+        const [role, company] = ex.title.includes(' — ')
+            ? ex.title.split(' — ')
+            : [ex.title, ''];
+        // Abbreviate long date ranges
+        const dates = ex.dates.replace(/June/,'Jun').replace(/September/,'Sep');
+        return (
+            <div
+                class="ledger-row"
+                style="grid-template-columns: 140px 1fr 1fr;"
+            >
+                <span
+                    class="font-mono text-[12px] tracking-[0.1em]"
+                    style="font-variant-numeric: tabular-nums;"
+                >
+                    {dates}
+                </span>
+                <span
+                    class={`font-display font-medium leading-[1] ${ex.dates.includes('Present') ? 'text-teal' : ''}`}
+                    style="font-size: 24px; letter-spacing: -0.2px;"
+                >
+                    {role}
+                </span>
+                <span class="font-body text-[14px] opacity-75">{company}</span>
+            </div>
+        );
+    })}
+
     <!-- Education rows -->
     {education.map((e, i) => (
         <div
@@ -225,34 +254,6 @@ const { recentProjects = [] } = Astro.props;
         </div>
     ))}
 
-    <!-- Experience rows -->
-    {experience.map(ex => {
-        const [role, company] = ex.title.includes(' — ')
-            ? ex.title.split(' — ')
-            : [ex.title, ''];
-        // Abbreviate long date ranges
-        const dates = ex.dates.replace(/June/,'Jun').replace(/September/,'Sep');
-        return (
-            <div
-                class="ledger-row"
-                style="grid-template-columns: 140px 1fr 1fr;"
-            >
-                <span
-                    class="font-mono text-[12px] tracking-[0.1em]"
-                    style="font-variant-numeric: tabular-nums;"
-                >
-                    {dates}
-                </span>
-                <span
-                    class="font-display font-medium leading-[1]"
-                    style="font-size: 24px; letter-spacing: -0.2px;"
-                >
-                    {role}
-                </span>
-                <span class="font-body text-[14px] opacity-75">{company}</span>
-            </div>
-        );
-    })}
 </section>
 
 <!-- ── § Publications (ledger) ─ rendered by Publications.astro ── -->
@@ -339,7 +340,11 @@ const { recentProjects = [] } = Astro.props;
         const io = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    bio.classList.add('is-visible');
+                    // Double rAF ensures opacity:0 is painted before the transition starts,
+                    // so the animation is always visible even when element loads in viewport.
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        bio.classList.add('is-visible');
+                    }));
                     io.disconnect();
                 }
             },

@@ -19,7 +19,16 @@ interface Props {
     projects: Project[];
 }
 
-const CATEGORIES = ['all', 'academic', 'personal', 'work'] as const;
+const CATEGORIES = ['all', 'work', 'academic', 'personal'] as const;
+
+const HEADERS = [
+    { label: '№',      mobile: true  },
+    { label: '',       mobile: false }, // thumbnail col
+    { label: 'TITLE',  mobile: true  },
+    { label: 'TAGS',   mobile: false },
+    { label: 'YEAR',   mobile: true  },
+    { label: 'STATUS', mobile: true  },
+] as const;
 
 const STATUS_SYMBOL: Record<string, { symbol: string; color: string }> = {
     complete: { symbol: '●', color: '#1E1E1C' },
@@ -71,21 +80,16 @@ export default function ProjectGrid({ projects }: Props) {
 
             {/* ── Column headers ── */}
             <div
-                className="grid items-end pb-[10px] border-b"
-                style={{
-                    gridTemplateColumns: '36px 72px 2fr 1fr 60px 100px',
-                    gap: 20,
-                    padding: '0 12px 10px 12px',
-                    borderBottom: '1px solid rgba(30,30,28,0.14)',
-                }}
+                className="project-ledger-row items-end"
+                style={{ padding: '0 12px 10px 12px', borderBottom: '1px solid rgba(30,30,28,0.14)' }}
             >
-                {['№', '', 'TITLE', 'TAGS', 'YEAR', 'STATUS'].map(h => (
+                {HEADERS.map(({ label, mobile }) => (
                     <span
-                        key={h}
-                        className="font-mono opacity-50"
+                        key={label || 'thumb'}
+                        className={`font-mono opacity-50${mobile ? '' : ' hidden md:block'}`}
                         style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                     >
-                        {h}
+                        {label}
                     </span>
                 ))}
             </div>
@@ -122,13 +126,8 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
             className="ledger-row-link block no-underline text-ink"
         >
             <div
-                className="grid items-start"
-                style={{
-                    gridTemplateColumns: '36px 72px 2fr 1fr 60px 100px',
-                    gap: 20,
-                    padding: '22px 12px',
-                    borderBottom: '1px solid rgba(30,30,28,0.14)',
-                }}
+                className="project-ledger-row items-start"
+                style={{ padding: '22px 12px', borderBottom: '1px solid rgba(30,30,28,0.14)' }}
             >
                 {/* № */}
                 <span
@@ -138,15 +137,13 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     {String(index + 1).padStart(3, '0')}
                 </span>
 
-                {/* Thumbnail placeholder */}
+                {/* Thumbnail — hidden on mobile */}
                 <div
+                    className="hidden md:flex items-center justify-center"
                     style={{
                         width: 64, height: 64,
                         border: '1px solid rgba(30,30,28,0.14)',
                         background: '#DFDCD7',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         flexShrink: 0,
                     }}
                 >
@@ -163,7 +160,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                 </div>
 
                 {/* Title + summary */}
-                <div>
+                <div className="min-w-0">
                     <div
                         className="font-display font-medium row-title leading-[1] mb-[6px]"
                         style={{ fontSize: 30, letterSpacing: '-0.3px' }}
@@ -195,9 +192,9 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     )}
                 </div>
 
-                {/* Tags */}
+                {/* Tags — hidden on mobile */}
                 <div
-                    className="font-mono opacity-75"
+                    className="hidden md:block font-mono opacity-75"
                     style={{ fontSize: 10, lineHeight: 1.7, letterSpacing: '0.05em' }}
                 >
                     {p.tags.map(t => <div key={t}>#{t}</div>)}
@@ -217,7 +214,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     style={{ fontSize: 11 }}
                 >
                     <span style={{ color: status.color }}>{status.symbol}</span>
-                    <span className="opacity-70">{p.status}</span>
+                    <span className="opacity-70 hidden sm:inline">{p.status}</span>
                 </div>
             </div>
         </a>
