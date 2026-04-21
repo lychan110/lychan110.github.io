@@ -1,5 +1,4 @@
 ---
-// Author: Yu-Chin Chan
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
@@ -13,57 +12,108 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 
+const allProjects = await getCollection('projects');
+const sorted = allProjects.sort((a, b) => b.data.date.localeCompare(a.data.date));
+const idx = sorted.findIndex(p => p.slug === project.slug);
+const prev = sorted[idx + 1] ?? null;
+const next = sorted[idx - 1] ?? null;
+
+const entryNum = String(idx + 1).padStart(3, '0');
+const year = project.data.date.slice(0, 4);
+
 const links = [
-    project.data.paper_url && { label: 'Paper',  href: project.data.paper_url },
-    project.data.repo_url  && { label: 'Repo',   href: project.data.repo_url  },
-    project.data.demo_url  && { label: 'Demo',   href: project.data.demo_url  },
+    project.data.paper_url && { label: 'Paper', href: project.data.paper_url },
+    project.data.repo_url  && { label: 'Repo',  href: project.data.repo_url  },
+    project.data.demo_url  && { label: 'Demo',  href: project.data.demo_url  },
 ].filter(Boolean) as { label: string; href: string }[];
+
+const statusSymbol = { complete: '●', ongoing: '◐', archived: '○' }[project.data.status] ?? '●';
+const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B6762' }[project.data.status];
 ---
 
-<Base title={`${project.data.title} — Yu-Chin Chan`}
-     description={project.data.summary}>
-    <Nav />
-    <main class="pt-28 pb-24 px-8 md:px-16 max-w-3xl mx-auto">
+<Base
+    title={`${project.data.title} — Yu-Chin Chan`}
+    description={project.data.summary}
+>
+    <Nav current="projects" />
+    <main>
 
         <!-- Breadcrumb -->
-        <div class="mb-10">
-            <a href="/projects"
-               class="font-mono text-2xs tracking-widest uppercase text-muted
-                      hover:text-paper transition-colors">
-                ← Projects
+        <div class="px-page pt-[24px]">
+            <a
+                href="/projects"
+                class="font-mono text-[10px] tracking-[0.15em] uppercase opacity-60
+                       hover:opacity-100 hover:text-teal transition-all no-underline"
+            >
+                ← projects / {project.slug}
             </a>
         </div>
 
-        <!-- Header -->
-        <div class="section-rule mb-10">
-            <span class="font-mono text-2xs tracking-widest uppercase text-teal">
-                {project.data.category} · {project.data.date.slice(0, 4)} · {project.data.status}
-            </span>
-            <h1 class="font-display text-5xl md:text-6xl text-paper mt-2 leading-tight">
+        <!-- Masthead -->
+        <div class="px-page pt-[28px] pb-[36px] max-w-[1100px]">
+            <p class="kicker mb-[12px]">
+                Entry № {entryNum} · {project.data.category} · {year}
+            </p>
+            <h1
+                class="font-display font-normal leading-[0.95] m-0"
+                style="font-size: clamp(48px, 7vw, 96px); letter-spacing: -2.2px;"
+            >
                 {project.data.title}
             </h1>
-            <p class="text-paper/60 text-base mt-4 leading-relaxed">
+            <p
+                class="font-display italic leading-[1.4] opacity-88 max-w-[680px] mt-[28px] mb-0"
+                style="font-size: 24px;"
+            >
                 {project.data.summary}
             </p>
         </div>
 
-        <!-- Tags -->
-        <div class="flex flex-wrap gap-1.5 mb-8">
-            {project.data.tags.map((tag: string) => (
-                <span class="tag text-[10px]">{tag}</span>
-            ))}
+        <!-- Metadata ledger -->
+        <div
+            class="px-page grid"
+            style="border-top: 1px solid #1E1E1C; border-bottom: 1px solid rgba(30,30,28,0.14);"
+        >
+            <div
+                class="grid"
+                style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));"
+            >
+                {[
+                    { label: 'STATUS',   value: project.data.status },
+                    { label: 'CATEGORY', value: project.data.category },
+                    { label: 'YEAR',     value: year },
+                    { label: 'TAGS',     value: project.data.tags.join(' · ') },
+                ].map(({ label, value }, i, arr) => (
+                    <div
+                        style={{
+                            padding: '18px 20px',
+                            borderRight: i < arr.length - 1 ? '1px solid rgba(30,30,28,0.14)' : 'none',
+                        }}
+                    >
+                        <p class="font-mono m-0 mb-[5px] opacity-55" style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;">
+                            {label}
+                        </p>
+                        {label === 'STATUS' ? (
+                            <p class="font-mono m-0 flex items-center gap-[6px]" style="font-size: 11px;">
+                                <span style={`color: ${statusColor}`}>{statusSymbol}</span>
+                                <span>{value}</span>
+                            </p>
+                        ) : (
+                            <p class="font-mono m-0" style="font-size: 11px; line-height: 1.6;">{value}</p>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
 
-        <!-- Links -->
+        <!-- Resources strip -->
         {links.length > 0 && (
-            <div class="flex flex-wrap gap-3 mb-12">
+            <div
+                class="px-page flex items-center gap-2 py-[16px]"
+                style="border-bottom: 1px solid rgba(30,30,28,0.14);"
+            >
+                <span class="kicker mr-[6px]">Resources →</span>
                 {links.map(({ label, href }) => (
-                    <a href={href}
-                       target="_blank"
-                       rel="noopener"
-                       class="font-mono text-2xs tracking-widest uppercase
-                              text-teal border border-teal/40 px-4 py-2
-                              hover:bg-teal/10 transition-colors">
+                    <a href={href} target="_blank" rel="noopener" class="resource-pill">
                         {label} ↗
                     </a>
                 ))}
@@ -71,14 +121,64 @@ const links = [
         )}
 
         <!-- MDX body -->
-        <article class="prose prose-invert prose-lg max-w-none
-                        prose-headings:font-display prose-headings:font-light
-                        prose-headings:text-paper prose-p:text-paper/70
+        <article class="px-page py-[48px] max-w-[820px] mx-auto
+                        prose prose-editorial max-w-none
+                        prose-headings:font-display prose-headings:font-normal
+                        prose-headings:tracking-tight prose-headings:text-ink
+                        prose-p:font-body prose-p:text-[17px] prose-p:leading-[1.7]
                         prose-a:text-teal prose-a:no-underline hover:prose-a:underline
-                        prose-code:text-teal prose-code:font-mono
-                        prose-strong:text-paper prose-hr:border-ink-3">
+                        prose-a:underline-offset-[3px]
+                        prose-blockquote:font-display prose-blockquote:italic
+                        prose-blockquote:text-[28px] prose-blockquote:leading-[1.35]
+                        prose-blockquote:border-l-2 prose-blockquote:border-teal
+                        prose-code:font-mono prose-code:text-teal
+                        prose-strong:text-ink
+                        prose-hr:border-rule">
             <Content />
         </article>
+
+        <!-- Prev / Next -->
+        {(prev || next) && (
+            <div
+                class="px-page pt-[36px] pb-[44px] grid grid-cols-2 gap-[24px]"
+                style="border-top: 1px solid #1E1E1C;"
+            >
+                <div>
+                    {prev && (
+                        <a href={`/projects/${prev.slug}`} class="block no-underline text-ink group">
+                            <p class="kicker mb-[8px]">← Previous</p>
+                            <p
+                                class="font-display font-medium row-title leading-[1] m-0 mb-[6px]
+                                       group-hover:text-teal transition-colors"
+                                style="font-size: 30px; letter-spacing: -0.3px;"
+                            >
+                                {prev.data.title}
+                            </p>
+                            <p class="font-mono m-0 opacity-60" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
+                                {prev.data.date.slice(0,4)} · {prev.data.category}
+                            </p>
+                        </a>
+                    )}
+                </div>
+                <div class="text-right">
+                    {next && (
+                        <a href={`/projects/${next.slug}`} class="block no-underline text-ink group">
+                            <p class="kicker mb-[8px]">Next →</p>
+                            <p
+                                class="font-display font-medium row-title leading-[1] m-0 mb-[6px]
+                                       group-hover:text-teal transition-colors"
+                                style="font-size: 30px; letter-spacing: -0.3px;"
+                            >
+                                {next.data.title}
+                            </p>
+                            <p class="font-mono m-0 opacity-60" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
+                                {next.data.date.slice(0,4)} · {next.data.category}
+                            </p>
+                        </a>
+                    )}
+                </div>
+            </div>
+        )}
 
     </main>
     <Footer />

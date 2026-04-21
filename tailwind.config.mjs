@@ -4,37 +4,41 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Preserved from existing site
-                'ink':    '#1E1E1C',
-                'paper':  '#E8E6E3',
-                'teal':   '#8CC1DB',
-                // Extended palette
-                'ink-2':  '#2A2A28',
-                'ink-3':  '#3A3A38',
-                'muted':  '#6B6B69',
-                'teal-dim': '#5A99B8',
+                // Core palette
+                ink:        '#1E1E1C',
+                inkSoft:    '#3A3A37',
+                paper:      '#E8E6E3',
+                paperDeep:  '#DFDCD7',
+                paperSoft:  '#F2F0EC',
+                // Accent
+                teal:       '#2E8CA6',
+                tealPale:   '#8CC1DB',
+                tealDeep:   '#1F6B80',
+                // Alt accents (optional)
+                coral:      '#D88A73',
+                ochre:      '#C9A961',
+                sage:       '#9FB79B',
+                rust:       '#B5593C',
+                // Utility
+                muted:      '#6B6762',
             },
             fontFamily: {
-                // Display: editorial, slightly unexpected
                 display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-                // Body: clean and legible
-                body:    ['"Lato"', 'sans-serif'],
-                // Mono: for tags and code
-                mono:    ['"JetBrains Mono"', 'monospace'],
+                body:    ['"Lato"', 'system-ui', 'sans-serif'],
+                mono:    ['"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace'],
+                hand:    ['"Caveat"', 'cursive'],
             },
             fontSize: {
-                '2xs': '0.65rem',
+                '2xs': ['0.65rem', { lineHeight: '1' }],
+                '3xs': ['0.55rem', { lineHeight: '1' }],
             },
             letterSpacing: {
                 widest: '0.25em',
             },
-            backgroundImage: {
-                // Subtle noise texture via SVG data URI — applied to hero
-                'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\")",
-            },
             animation: {
-                'fade-up':   'fadeUp 0.6s ease forwards',
-                'fade-in':   'fadeIn 0.4s ease forwards',
+                'fade-up':    'fadeUp 0.4s ease forwards',
+                'fade-in':    'fadeIn 0.4s ease forwards',
+                'page-enter': 'pageEnter 0.4s ease forwards',
             },
             keyframes: {
                 fadeUp: {
@@ -45,14 +49,18 @@ export default {
                     '0%':   { opacity: '0' },
                     '100%': { opacity: '1' },
                 },
+                pageEnter: {
+                    '0%':   { opacity: '0', transform: 'translateY(6px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
             },
         },
     },
     safelist: [
-        // STATUS_COLORS in ProjectGrid.tsx — dynamic class strings won't survive purge
-        'text-teal',
-        'text-paper/60',
-        'text-muted',
+        // Dynamically built class strings in ProjectGrid.tsx
+        'text-teal', 'text-ink', 'text-muted',
+        'bg-ink', 'bg-paper',
+        'pill', 'pill.active',
     ],
     plugins: [
         require('@tailwindcss/typography'),

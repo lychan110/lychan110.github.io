@@ -1,6 +1,6 @@
-# yuchinchan.com
+# lychan110.github.io
 
-Personal portfolio and CV site — [yuchinchan.com](https://yuchinchan.com).
+Personal portfolio and CV site — [lychan110.github.io](https://lychan110.github.io).
 
 **Stack:** Astro 4 · Tailwind CSS · React islands · MDX · GitHub Actions → `gh-pages` branch
 
@@ -24,4 +24,4 @@ With Claude Code, use the `/add-entry` or `/sync-from-obsidian` skills.
 
 ## Deploy
 
-Push to `master` → GitHub Actions builds and pushes `dist/` to `gh-pages` → live at `yuchinchan.com`.
+Push to `master` → GitHub Actions builds and pushes `dist/` to `gh-pages` → live at `lychan110.github.io`.

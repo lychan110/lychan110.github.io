@@ -1,52 +1,313 @@
 ---
-// About — data comes from src/data/about.ts so content edits don't touch this component.
-import { bio, education, awards } from '../data/about';
+// About — all sections of the landing page live here.
+// recentProjects is passed from index.astro (3 most-recent entries).
+import { bio, education, awards, experience, talks } from '../data/about';
+
+interface RecentProject {
+    slug: string;
+    title: string;
+    summary: string;
+    category: string;
+    date: string;
+    status: string;
+}
+
+interface Props {
+    recentProjects?: RecentProject[];
+}
+
+const { recentProjects = [] } = Astro.props;
 ---
 
-<section id="about" class="py-24 px-8 md:px-16 lg:px-24">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+<!-- ── § Masthead ──────────────────────────────────────────── -->
+<section class="px-page pt-[56px] pb-0">
+    <p class="kicker mb-[14px]">— About · Updated 2026·04</p>
+    <h1
+        class="font-display font-normal leading-[0.95] tracking-tight text-ink max-w-[1000px]"
+        style="font-size: clamp(56px, 8.6vw, 104px); letter-spacing: clamp(-1.4px, -0.18vw, -2.4px);"
+    >
+        Designer, <em>researcher,</em><br />
+        and <em class="text-teal">quiet tool-builder.</em>
+    </h1>
+</section>
 
-        <!-- Bio -->
-        <div class="lg:col-span-2">
-            <div class="section-rule mb-8">
-                <h2 class="font-display text-4xl text-paper mb-1">About</h2>
+<!-- ── § Bio + Portrait ───────────────────────────────────── -->
+<section class="px-page pt-[40px] pb-[36px]">
+    <div
+        class="grid gap-[56px]"
+        style="grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);"
+    >
+        <!-- Portrait -->
+        <div>
+            <div
+                class="relative overflow-hidden"
+                style="aspect-ratio: 4/5; box-shadow: 0 1px 0 #1E1E1C, 0 18px 40px -24px rgba(0,0,0,0.35);"
+            >
+                <!-- Replace with real portrait: <img src="/assets/img/portrait.jpg" ... /> -->
+                <img
+                    src="/assets/img/IMG_20180922_162555.jpg"
+                    alt="Yu-Chin Chan"
+                    class="w-full h-full object-cover"
+                    style="filter: saturate(0.92) contrast(1.02);"
+                />
+                <!-- Registration mark -->
+                <span
+                    class="absolute top-[8px] left-[8px] font-mono text-[9px]
+                           tracking-[0.15em] text-white/75 pointer-events-none"
+                >
+                    + PL.01
+                </span>
             </div>
-            <div class="text-paper/70 leading-relaxed space-y-4 max-w-prose">
-                {bio.map(paragraph => <p>{paragraph}</p>)}
+            <!-- Caption -->
+            <div class="flex justify-between mt-2">
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
+                    Fig. 1 — Y.C.
+                </span>
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
+                    2025
+                </span>
             </div>
         </div>
 
-        <!-- Sidebar: Education + Awards -->
-        <div class="space-y-10">
-            <div>
-                <h3 class="font-mono text-2xs tracking-widest uppercase text-teal mb-4">
-                    Education
-                </h3>
-                <ul class="space-y-4">
-                    {education.map(e => (
-                        <li class="text-sm">
-                            <p class="text-paper font-medium">{e.school}</p>
-                            <p class="text-muted">{e.degree}</p>
-                            <p class="text-muted/60 text-xs font-mono">{e.years}</p>
-                            <p class="text-muted/60 text-xs">{e.note}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        <!-- Bio -->
+        <div class="flex flex-col justify-center gap-5">
+            <!-- Italic lead -->
+            {bio.length > 0 && (
+                <p
+                    class="font-display italic leading-[1.35] text-ink/88 max-w-[680px]"
+                    style="font-size: 24px;"
+                >
+                    {bio[0]}
+                </p>
+            )}
+            <!-- Body paragraphs -->
+            {bio.slice(1).map(para => (
+                <p class="font-body text-[16px] leading-[1.65] text-ink/82 max-w-[620px]">
+                    {para}
+                </p>
+            ))}
 
-            <div>
-                <h3 class="font-mono text-2xs tracking-widest uppercase text-teal mb-4">
-                    Awards
-                </h3>
-                <ul class="space-y-2">
-                    {awards.map(a => (
-                        <li class="text-sm">
-                            <span class="text-paper/80">{a.title}</span>
-                            <span class="text-muted/60 font-mono text-xs ml-2">{a.year}</span>
-                        </li>
-                    ))}
-                </ul>
+            <!-- Contact links -->
+            <div class="flex flex-wrap gap-x-7 gap-y-3 mt-[8px]">
+                <span class="font-mono text-[11px] tracking-[0.05em]">
+                    <span class="opacity-55 mr-2">Email</span>
+                    <a
+                        href="mailto:lychan115@gmail.com"
+                        class="border-b border-teal pb-[2px] text-ink hover:text-teal
+                               transition-colors no-underline"
+                    >
+                        lychan115@gmail.com
+                    </a>
+                </span>
+                <span class="font-mono text-[11px] tracking-[0.05em]">
+                    <span class="opacity-55 mr-2">GitHub</span>
+                    <a
+                        href="https://github.com/lychan110"
+                        target="_blank" rel="noopener"
+                        class="border-b border-teal pb-[2px] text-ink hover:text-teal
+                               transition-colors no-underline"
+                    >
+                        lychan110
+                    </a>
+                </span>
+                <span class="font-mono text-[11px] tracking-[0.05em]">
+                    <span class="opacity-55 mr-2">Scholar</span>
+                    <a
+                        href="https://scholar.google.com/citations?user=ZK2gpWYAAAAJ"
+                        target="_blank" rel="noopener"
+                        class="border-b border-teal pb-[2px] text-ink hover:text-teal
+                               transition-colors no-underline"
+                    >
+                        Yu-Chin Chan
+                    </a>
+                </span>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── § Recent Work ──────────────────────────────────────── -->
+{recentProjects.length > 0 && (
+    <section class="px-page pt-[48px] pb-[48px] border-t border-ink border-b border-rule">
+        <!-- Header -->
+        <div class="flex items-baseline justify-between mb-[28px]">
+            <h2
+                class="font-display font-normal text-ink m-0"
+                style="font-size: 44px; letter-spacing: -0.8px;"
+            >
+                <em>Recent</em> work.
+            </h2>
+            <a
+                href="/projects"
+                class="font-mono text-[10px] tracking-[0.2em] uppercase
+                       border-b border-teal text-ink hover:text-teal transition-colors no-underline"
+            >
+                See all →
+            </a>
+        </div>
+
+        <!-- 3-up cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[28px]">
+            {recentProjects.map(p => (
+                <a
+                    href={`/projects/${p.slug}`}
+                    class="card-hover block no-underline text-ink"
+                >
+                    <!-- Placeholder swatch -->
+                    <div
+                        class="w-full bg-paperDeep border border-rule"
+                        style="height: 200px; display: flex; align-items: center; justify-content: center;"
+                    >
+                        <span class="font-mono text-[9px] tracking-widest uppercase opacity-30">
+                            {p.slug}
+                        </span>
+                    </div>
+                    <div class="mt-[14px]">
+                        <p class="kicker mb-[6px]">{p.date.slice(0,4)} · {p.category}</p>
+                        <h3
+                            class="font-display font-medium card-title m-0 mb-[8px] leading-[1]"
+                            style="font-size: 28px; letter-spacing: -0.3px;"
+                        >
+                            {p.title}
+                        </h3>
+                        <p class="font-body text-[14px] leading-[1.55] opacity-80 m-0">
+                            {p.summary}
+                        </p>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </section>
+)}
+
+<!-- ── § Résumé (ledger) ──────────────────────────────────── -->
+<section class="px-page pt-[48px] pb-[40px] border-b border-rule">
+    <div class="flex items-baseline justify-between mb-[28px]">
+        <h2
+            class="font-display font-normal text-ink m-0"
+            style="font-size: 44px; letter-spacing: -0.8px;"
+        >
+            <em>A résumé,</em> compressed.
+        </h2>
+        <span class="kicker">§ 01 / 04</span>
+    </div>
+
+    <!-- Education rows -->
+    {education.map((e, i) => (
+        <div
+            class="ledger-row"
+            style="grid-template-columns: 140px 1fr 1fr;"
+        >
+            <span
+                class="font-mono text-[12px] tracking-[0.1em]"
+                style="font-variant-numeric: tabular-nums;"
+            >
+                {e.years}
+            </span>
+            <span
+                class="font-display font-medium leading-[1]"
+                style="font-size: 24px; letter-spacing: -0.2px;"
+            >
+                {e.degree}
+            </span>
+            <span class="font-body text-[14px] opacity-75">{e.school}</span>
+        </div>
+    ))}
+
+    <!-- Experience rows -->
+    {experience.map(ex => {
+        const [role, company] = ex.title.includes(' — ')
+            ? ex.title.split(' — ')
+            : [ex.title, ''];
+        // Abbreviate long date ranges
+        const dates = ex.dates.replace(/June/,'Jun').replace(/September/,'Sep');
+        return (
+            <div
+                class="ledger-row"
+                style="grid-template-columns: 140px 1fr 1fr;"
+            >
+                <span
+                    class="font-mono text-[12px] tracking-[0.1em]"
+                    style="font-variant-numeric: tabular-nums;"
+                >
+                    {dates}
+                </span>
+                <span
+                    class="font-display font-medium leading-[1]"
+                    style="font-size: 24px; letter-spacing: -0.2px;"
+                >
+                    {role}
+                </span>
+                <span class="font-body text-[14px] opacity-75">{company}</span>
+            </div>
+        );
+    })}
+</section>
+
+<!-- ── § Publications (ledger) ─ rendered by Publications.astro ── -->
+<slot name="publications" />
+
+<!-- ── § Awards + Talks ───────────────────────────────────── -->
+<section id="about-awards" class="px-page pt-[48px] pb-[48px]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-[48px]">
+
+        <!-- Awards -->
+        <div>
+            <div class="flex items-baseline justify-between mb-[20px]">
+                <h2
+                    class="font-display font-normal text-ink m-0"
+                    style="font-size: 32px; letter-spacing: -0.4px;"
+                >
+                    <em>Awards &amp;</em> honors.
+                </h2>
+                <span class="kicker">§ 03</span>
+            </div>
+            {awards.map((a, i) => (
+                <div
+                    class="ledger-row"
+                    style="grid-template-columns: 56px 1fr;"
+                >
+                    <span class="font-mono text-[11px] opacity-70"
+                          style="font-variant-numeric: tabular-nums;">{a.year}</span>
+                    <span
+                        class="font-display font-medium"
+                        style="font-size: 18px;"
+                    >{a.title}</span>
+                </div>
+            ))}
+        </div>
+
+        <!-- Talks -->
+        <div>
+            <div class="flex items-baseline justify-between mb-[20px]">
+                <h2
+                    class="font-display font-normal text-ink m-0"
+                    style="font-size: 32px; letter-spacing: -0.4px;"
+                >
+                    <em>Selected</em> talks.
+                </h2>
+                <span class="kicker">§ 04</span>
+            </div>
+            {talks.map((t, i) => (
+                <div
+                    class="ledger-row"
+                    style="grid-template-columns: 56px 1fr;"
+                >
+                    <span class="font-mono text-[11px] opacity-70"
+                          style="font-variant-numeric: tabular-nums;">{t.date.slice(-4)}</span>
+                    <div>
+                        <span
+                            class="font-display font-medium block"
+                            style="font-size: 18px; line-height: 1.2;"
+                        >{t.title}</span>
+                        {t.venue && (
+                            <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+                                {t.venue}{t.location ? ` · ${t.location}` : ''}
+                            </span>
+                        )}
+                    </div>
+                </div>
+            ))}
         </div>
 
     </div>

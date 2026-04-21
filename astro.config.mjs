@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-    site: 'https://yuchinchan.com',
+    site: 'https://lychan110.github.io',
     integrations: [
         mdx(),
         react(),

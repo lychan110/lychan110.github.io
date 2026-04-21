@@ -6,30 +6,31 @@ import ProjectGrid from '../components/ProjectGrid';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-
-// Serialize for React island
 const projects = allProjects
-    .map(p => ({
-        slug:      p.slug,
-        ...p.data,
-    }))
-    .sort((a, b) => b.date.localeCompare(a.date)); // newest first
+    .map(p => ({ slug: p.slug, ...p.data }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+const count = String(projects.length).padStart(3, '0');
 ---
 
 <Base title="Projects — Yu-Chin Chan">
-    <Nav />
-    <main class="pt-28 pb-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
-
-        <div class="section-rule mb-12">
-            <h1 class="font-display text-5xl text-paper mb-1">Projects</h1>
-            <p class="font-mono text-2xs tracking-widest uppercase text-muted">
-                Personal · Academic · Professional
-            </p>
+    <Nav current="projects" />
+    <main>
+        <!-- Masthead -->
+        <div class="px-page pt-[56px] pb-[28px]">
+            <p class="kicker mb-[14px]">— Catalog № 001 — {count}</p>
+            <h1
+                class="font-display font-normal leading-[0.95] m-0"
+                style="font-size: 88px; letter-spacing: -1.8px;"
+            >
+                Projects, <em>indexed.</em>
+            </h1>
         </div>
 
-        <!-- React island: filterable grid -->
-        <ProjectGrid client:load projects={projects} />
-
+        <!-- React island: filterable ledger -->
+        <div class="px-page pb-[48px]">
+            <ProjectGrid client:load projects={projects} />
+        </div>
     </main>
     <Footer />
 </Base>

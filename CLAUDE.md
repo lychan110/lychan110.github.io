@@ -1,6 +1,6 @@
 # Repo context for Claude
 
-Personal mini-CV / portfolio site served from `yuchinchan.com` (GitHub Pages via GitHub Actions). Content grows organically, fed by Claude from two Obsidian vaults at `C:\Users\lycha\Desktop\projects\Obsidian`:
+Personal mini-CV / portfolio site served from `lychan110.github.io` (GitHub Pages via GitHub Actions). Content grows organically, fed by Claude from two Obsidian vaults at `C:\Users\lycha\Desktop\projects\Obsidian`:
 
 - **Personal vault** ("Lenya's brain") — freely publishable.
 - **Work vault** — IP-bearing. Content from here MUST be scrubbed before it enters this repo. Never commit anything from the work vault without the `ip-scrubber` subagent having passed on it.
@@ -17,7 +17,7 @@ Personal mini-CV / portfolio site served from `yuchinchan.com` (GitHub Pages via
 - `src/content/projects/*.mdx` — one project per MDX file, schema enforced by `src/content/config.ts`
 - `src/data/about.ts` — bio, education, awards, experience, talks (typed data)
 - `src/assets/ychan_pubs.bib` — BibTeX, parsed at build by `scripts/parse-bib.js` into `public/data/publications.json`
-- `public/` — static assets served as-is (images, favicon, CNAME, generated JSON)
+- `public/` — static assets served as-is (images, favicon, generated JSON)
 
 Build: `npm run build` (runs `parse-bib.js` → `astro build`). Dev: `npm run dev` (Astro dev server with HMR on :4321). Preview via the `dev` config in `.claude/launch.json` — always use `preview_start`, not Bash, to run it.
 
@@ -60,7 +60,7 @@ Standard BibTeX. `scripts/parse-bib.js` extracts the fields Publications.astro c
 
 ## Deploy
 
-`.github/workflows/deploy.yml` builds on push to main and deploys `dist/` to GitHub Pages. `public/CNAME` → `yuchinchan.com`.
+`.github/workflows/deploy.yml` builds on push to `master` and pushes `dist/` to the `gh-pages` branch → served at `lychan110.github.io`.
 
 ## Conventions for Claude
 

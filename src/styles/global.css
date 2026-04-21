@@ -1,100 +1,189 @@
-/* ─── Fonts ──────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ─── Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design tokens ─────────────────────────────────────── */
+:root {
+    --color-ink:        #1E1E1C;
+    --color-ink-soft:   #3A3A37;
+    --color-paper:      #E8E6E3;
+    --color-paper-deep: #DFDCD7;
+    --color-paper-soft: #F2F0EC;
+    --color-teal:       #2E8CA6;
+    --color-teal-pale:  #8CC1DB;
+    --color-teal-deep:  #1F6B80;
+    --color-muted:      #6B6762;
+    --color-rule:       rgba(30, 30, 28, 0.14);
+    --color-rule-strong: rgba(30, 30, 28, 0.28);
+    /* Page-level horizontal padding */
+    --pad: 72px;
+}
+
 /* ─── Base ───────────────────────────────────────────────── */
 @layer base {
-    :root {
-        --color-ink:      #1E1E1C;
-        --color-paper:    #E8E6E3;
-        --color-teal:     #8CC1DB;
-        --color-teal-dim: #5A99B8;
-        --color-muted:    #6B6B69;
-    }
-
     html {
+        background-color: var(--color-paper);
+        color: var(--color-ink);
         @apply scroll-smooth;
-        background-color: var(--color-ink);
-        color: var(--color-paper);
     }
 
     body {
         @apply font-body antialiased;
-        font-size: 15px;
-        line-height: 1.7;
+        font-size: 16px;
+        line-height: 1.65;
+        background-color: var(--color-paper);
     }
 
     ::selection {
         background-color: var(--color-teal);
-        color: var(--color-ink);
+        color: var(--color-paper);
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar        { width: 6px; }
-    ::-webkit-scrollbar-track  { background: var(--color-ink); }
-    ::-webkit-scrollbar-thumb  { background: var(--color-ink-3, #3A3A38); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--color-teal-dim); }
+    ::-webkit-scrollbar-track  { background: var(--color-paper-deep); }
+    ::-webkit-scrollbar-thumb  { background: var(--color-muted); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-teal); }
 }
 
 /* ─── Components ─────────────────────────────────────────── */
 @layer components {
-    /* Section divider — thin teal left border */
-    .section-rule {
-        @apply border-l-2 border-teal pl-5;
+
+    /* Kicker — small mono label above sections */
+    .kicker {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.55;
     }
 
-    /* Tag chip */
-    .tag {
-        @apply font-mono text-2xs tracking-widest uppercase
-               px-2 py-0.5 rounded-sm
-               bg-ink-2 text-teal border border-teal/20
-               transition-colors duration-200;
+    /* Filter / resource pill */
+    .pill {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 11px;
+        border: 1px solid var(--color-rule-strong);
+        background: transparent;
+        color: var(--color-ink);
+        transition: all 120ms;
+        cursor: pointer;
+        user-select: none;
     }
-    .tag:hover, .tag.active {
-        @apply bg-teal/10 border-teal/50;
+    .pill:hover {
+        border-color: var(--color-ink);
+        background: var(--color-paper-soft);
     }
-    .tag.active {
-        @apply text-paper;
-    }
-
-    /* Project card */
-    .project-card {
-        @apply relative bg-ink-2 border border-ink-3
-               rounded overflow-hidden
-               transition-all duration-300 ease-out
-               cursor-pointer;
-    }
-    .project-card:hover {
-        @apply border-teal/40 -translate-y-1;
-        box-shadow: 0 12px 40px rgba(140, 193, 219, 0.08);
+    .pill.active {
+        border-color: var(--color-ink);
+        background: var(--color-ink);
+        color: var(--color-paper);
     }
 
-    /* Nav link */
-    .nav-link {
-        @apply text-muted hover:text-paper font-mono text-2xs
-               tracking-widest uppercase transition-colors duration-200;
+    /* Nav active underline (rendered via ::after) */
+    .nav-item {
+        position: relative;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+        opacity: 0.6;
+        transition: opacity 150ms;
+        padding: 4px 14px;
+        text-decoration: none;
     }
-    .nav-link.active {
-        @apply text-teal;
+    .nav-item:hover {
+        opacity: 1;
+    }
+    .nav-item.active {
+        font-weight: 600;
+        opacity: 1;
+    }
+    .nav-item.active::after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: -2px;
+        height: 1.5px;
+        background-color: var(--color-ink);
     }
 
-    /* Publication entry */
-    .pub-entry {
-        @apply border-l-2 border-ink-3 pl-4
-               hover:border-teal transition-colors duration-200;
+    /* Ledger row — grid row with top border */
+    .ledger-row {
+        display: grid;
+        gap: 24px;
+        padding: 16px 0;
+        align-items: baseline;
+        border-top: 1px solid var(--color-rule);
+    }
+    .ledger-row:first-child {
+        border-top: 1px solid var(--color-ink);
     }
 
-    /* Staggered animation helpers */
-    .animate-stagger > * {
-        @apply opacity-0 animate-fade-up;
+    /* Ledger row hover (projects page) */
+    .ledger-row-link {
+        cursor: pointer;
+        transition: background 150ms;
     }
-    .animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
-    .animate-stagger > *:nth-child(2) { animation-delay: 80ms; }
-    .animate-stagger > *:nth-child(3) { animation-delay: 160ms; }
-    .animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
-    .animate-stagger > *:nth-child(5) { animation-delay: 320ms; }
-    .animate-stagger > *:nth-child(6) { animation-delay: 400ms; }
+    .ledger-row-link:hover {
+        background: var(--color-paper-soft);
+    }
+    .ledger-row-link:hover .row-title {
+        color: var(--color-teal);
+    }
+
+    /* Row title transition */
+    .row-title {
+        transition: color 150ms;
+    }
+
+    /* Status symbols */
+    .status-complete::before { content: '●'; color: var(--color-ink); }
+    .status-ongoing::before  { content: '◐'; color: var(--color-teal); }
+    .status-archived::before { content: '○'; color: var(--color-muted); }
+
+    /* Card hover lift */
+    .card-hover {
+        transition: transform 300ms cubic-bezier(.2,.7,.3,1);
+        cursor: pointer;
+    }
+    .card-hover:hover {
+        transform: translateY(-3px);
+    }
+    .card-hover:hover .card-title {
+        color: var(--color-teal);
+    }
+    .card-title {
+        transition: color 200ms;
+    }
+
+    /* MDX prose overrides */
+    .prose-editorial {
+        --tw-prose-body: var(--color-ink);
+        --tw-prose-headings: var(--color-ink);
+        --tw-prose-links: var(--color-teal);
+        --tw-prose-bold: var(--color-ink);
+        --tw-prose-hr: var(--color-rule);
+        --tw-prose-code: var(--color-teal);
+        --tw-prose-quotes: var(--color-ink-soft);
+        --tw-prose-quote-borders: var(--color-teal);
+    }
+}
+
+/* ─── Utilities ──────────────────────────────────────────── */
+@layer utilities {
+    .border-rule       { border-color: var(--color-rule); }
+    .border-rule-strong { border-color: var(--color-rule-strong); }
+
+    /* Responsive page padding matching --pad variable */
+    .px-page {
+        padding-left: clamp(24px, 5.5vw, 88px);
+        padding-right: clamp(24px, 5.5vw, 88px);
+    }
 }
