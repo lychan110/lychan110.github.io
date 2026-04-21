@@ -2,9 +2,9 @@ doctype html
 head
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  meta(name='description' content='mechanical engineering PhD student')
-  meta(name='author' content='Yu-Chin Chan')
-  title Yu-Chin Chan
+  meta(name='description' content=cv.site.description)
+  meta(name='author' content=cv.site.author)
+  title= cv.site.title
   link(rel='icon' type='image/x-icon' href='assets/img/favicon.ico')
   // Font Awesome icons (free version)
   script(src='https://use.fontawesome.com/releases/v5.13.0/js/all.js' crossorigin='anonymous')
@@ -36,8 +36,8 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-expand-md.navbar-light.fixed-top
 header.masthead
   #header-container.container.d-flex.h-100.align-items-center
     .mx-auto.text-center
-      h1.mx-auto.my-0.text-uppercase Yu-Chin Chan
-      h2.text-white-50.mx-auto.mt-4.mb-4 data-driven metamaterials design, deep learning,&nbsp;statistical design optimization
+      h1.mx-auto.my-0.text-uppercase= cv.site.title
+      h2.text-white-50.mx-auto.mt-4.mb-4!= cv.site.tagline
       a.btn.btn-link.js-scroll-trigger(href='#about')
         i.fa.fa-angle-down
 // About
@@ -46,7 +46,7 @@ section#about.about-section.text-center.bg-black
     .row
       .col.my-0
         #cv-summary.sticky-top
-          img#avatar.rounded-circle.img-fluid(src='assets/img/IMG_20180924_224211_907.jpg')
+          img#avatar.rounded-circle.img-fluid(src=cv.site.avatar)
           h2 About Yu-Chin
           .men
             div
@@ -65,105 +65,61 @@ section#about.about-section.text-center.bg-black
                 p
                   a.men-link.js-scroll-trigger(href='#pubs') Publications
       #cv-main.col-lg-8.mx-auto
-        p.text-justify.men-par
-          | I am a Ph.D. student at Northwestern University in the 
-          a(href='https://ideal.mech.northwestern.edu/' target='_blank') IDEAL
-          |  group.
-          |                     My interests are an interdisciplinary mix of engineering design, computer vision and graphics, mechanics and materials science, especially applied to metamaterials and additive manufacturing.
-        p.text-justify.men-par
-          | (This site is under construction. Please see my 
-          a(href='https://www.linkedin.com/in/lychan/' target='_blank') LinkedIn
-          |  for more complete information.)
-        // Education Sub-Section
+        p.text-justify.men-par!= cv.about
+        if cv.notice
+          p.text-justify.men-par!= cv.notice
+        // Education
         #edu.cv-left.justify-content-center.text-left.no-gutters
           h4 Education
           .card-deck
-            .card
-              .card-body.text-left
-                h6 North Carolina State University
-                .small.text-white-50
-                  | B.S. Mechanical Engineering (Honors)
-                  br
-                  | 2011 - 2015
-                  br
-                  | Minor Mathematics
-                  br
-                  | Summa Cum Laude
-            .card
-              .card-body.text-left
-                h6 Northwestern University
-                .small.text-white-50
-                  | Ph.D. Mechanical Engineering
-                  br
-                  | 2016 - (2021)
-                  br
-                  | Advisor: Prof. Wei Chen
-        // Awards Sub-Section
+            each edu in cv.education
+              .card
+                .card-body.text-left
+                  h6= edu.institution
+                  .small.text-white-50
+                    = edu.degree
+                    br
+                    = edu.dates
+                    if edu.notes
+                      each note in edu.notes
+                        br
+                        = note
+        // Awards
         #awards.cv-right.justify-content-center.text-right.no-gutters
           h4 Awards
           .card-deck
-            .card
-              .card-body.text-right
-                h6 Paper of Distinction for [Chan, Y. et al., 2020]
-                .small.text-white-50
-                  | Design Automation Conference at ASME IDETC/CIE,
-                  br
-                  | August 2020
-            .card
-              .card-body.text-right
-                h6 Graduate Research Fellowship
-                .small.text-white-50
-                  | National Science Foundation,
-                  br
-                  | April 2018
-            .card
-              .card-body.text-right
-                h6 Predictive Science &amp; Engineering Design Fellowship
-                .small.text-white-50
-                  | Northwestern University,
-                  br
-                  | August 2017
-            .card
-              .card-body.text-right
-                h6 Paper of Distinction [Tao, S. et al., 2017]
-                .small.text-white-50
-                  | Design Automation Conference at ASME IDETC/CIE,
-                  br
-                  | August 2017
-            .card
-              .card-body.text-right
-                h6 Walter P. Murphy Fellowship
-                .small.text-white-50
-                  | Northwestern University,
-                  br
-                  | September 2016
-        // Experience Sub-Section
+            each award in cv.awards
+              .card
+                .card-body.text-right
+                  h6= award.title
+                  .small.text-white-50
+                    | #{award.source},
+                    br
+                    = award.date
+        // Experience
         #exp.pubs-section.cv-left.justify-content-center.text-left.no-gutters
           h4 Experience
           ul
-            li
-              h6 Generative Design Intern (Siemens Corporate Technology)
-              .small.text-white-50
-                | June - September 2018
-                br
-                |                           Accelerated topology optimization for large-scale industrial problems (US Patent Pending); implemented as Python software.
-        // Talks Sub-Section
+            each exp in cv.experience
+              li
+                h6= exp.title
+                .small.text-white-50
+                  = exp.dates
+                  br
+                  = exp.summary
+        // Talks
         #talks.pubs-section.cv-right.justify-content-center.text-left.no-gutters
           h4 Talks
           ul
-            li
-              h6
-                | METASET: An Automated Data Selection Method for Scalable Data-Driven Design of Metamaterials
-              .small.text-white-50
-                em Design Automation Conference at ASME IDETC/CIE
-                | ,August 18, 2020.
-            li
-              h6
-                | A Spectral Shape Descriptor Based Approach for Data-Driven Metamaterials Design Optimization
-              .small.text-white-50
-                em 15th U.S. National Congress on Computational Mechanics
-                | , Austin, TX, July 29, 2019.
-        // Publications Sub-Section
+            each talk in cv.talks
+              li
+                h6= talk.title
+                .small.text-white-50
+                  em= talk.venue
+                  if talk.location
+                    | , #{talk.location}
+                  | , #{talk.date}.
+        // Publications (rendered from bib via bibtex-js)
         #pubs.pubs-section.cv-left.justify-content-center.text-left.no-gutters
           h4 Publications
           .bibtex_structure
@@ -188,14 +144,14 @@ section#about.about-section.text-center.bg-black
                   .small.text-white-50
                     span.author(max='4')
                       span.last
-                      span.first_initial , 
+                      span.first_initial ,
                     | ,
                     span.if.journal
                       em
                         span.journal
                       | ,
                     span.if.booktitle
-                      | In 
+                      | In
                       em
                         span.booktitle
                       | ,
@@ -222,50 +178,30 @@ section#about.about-section.text-center.bg-black
 section#projects.projects-section.bg-black
   .container
     h4 Projects
-    // Project One Row
-    .row.justify-content-center.no-gutters.mb-5.mb-lg-0
-      .col-lg-6
-        img.img-fluid(src='assets/img/mesh_bg_1.png' alt='')
-      .col-lg-6
-        .bg-black.text-center.h-100.project
-          .d-flex.h-100
-            .project-text.w-100.my-auto.text-center.text-lg-left
-              h4.text-white Data-Driven Metamaterials Design
-              p.mb-0.text-white-50
-                | Data-driven design and topology optimization of multi-scale metamaterials using deep learning and reduced geometric representations.
-              hr.d-none.d-lg-block.mb-0.ml-0
-    // Project Two Row
-    //
-      <div class="row justify-content-center no-gutters">
-      <div class="col-lg-6">
-      <img class="img-fluid" src="img/mesh_bg_1.png" alt="">
-      </div>
-      <div class="col-lg-6 order-lg-first">
-      <div class="bg-black text-center h-100 project">
-      <div class="d-flex h-100">
-      <div class="project-text w-100 my-auto text-center text-lg-right">
-      <h4 class="text-white">Machine Learning for Metal Manufacturing</h4>
-      <p class="mb-0 text-white-50">Data-driven prediction of process-microstructure-property-performance relationships for cast or additively manufactured metals.</p>
-      <hr class="d-none d-lg-block mb-0 mr-0">
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
+    each project, idx in projects
+      - var isRight = project.align === 'right'
+      .row.justify-content-center.no-gutters(class=idx < projects.length - 1 ? 'mb-5 mb-lg-0' : '')
+        .col-lg-6(class=isRight ? 'order-lg-first' : '')
+          img.img-fluid(src=project.image alt=project.title)
+        .col-lg-6
+          .bg-black.text-center.h-100.project
+            .d-flex.h-100
+              .project-text.w-100.my-auto(class=isRight ? 'text-center text-lg-right' : 'text-center text-lg-left')
+                h4.text-white= project.title
+                p.mb-0.text-white-50= project.body
+                if isRight
+                  hr.d-none.d-lg-block.mb-0.mr-0
+                else
+                  hr.d-none.d-lg-block.mb-0.ml-0
 // Footer
 #foot.footer-dark
   .container
     .row
       .col.item.social
-        a(data-bs-hover-animate='swing' href='https://www.linkedin.com/in/lychan/' target='_blank')
-          i.fab.fa-linkedin
-        a(data-bs-hover-animate='swing' href='https://scholar.google.com/citations?user=ZK2gpWYAAAAJ&hl=en' target='_blank')
-          i.fas.fa-graduation-cap
-        a(data-bs-hover-animate='swing' href='https://ideal.mech.northwestern.edu/' target='_blank')
-          i.fas.fa-building
-        a(data-bs-hover-animate='swing' href='https://github.com/lychan110' target='_blank')
-          i.fab.fa-github
-    p.copyright &copy; Yu-Chin Chan 2020
+        each link in cv.links
+          a(data-bs-hover-animate='swing' href=link.url target='_blank')
+            i(class=link.icon)
+    p.copyright &copy; #{cv.site.author} #{cv.site.copyright_year}
 // Bootstrap core JS
 script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js')
@@ -273,8 +209,6 @@ script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bund
 script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js')
 // Core theme JS
 script(src='js/scripts.js')
-// Custom scripts for this template
-// <script src="js/grayscale.min.js"></script>
 script(src='js/custom_cv.js')
 script(src='js/bs-animation.js')
 script(type='text/javascript' src='https://cdn.rawgit.com/pcooksey/bibtex-js/5ccf967/src/bibtex_js.js')

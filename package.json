@@ -43,6 +43,8 @@
         "browser-sync": "2.26.7",
         "chokidar": "3.4.0",
         "concurrently": "5.2.0",
+        "gray-matter": "^4.0.3",
+        "js-yaml": "^4.1.1",
         "postcss": "7.0.32",
         "prettier": "2.0.5",
         "pug": "3.0.0",

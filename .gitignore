@@ -1,2 +1,4 @@
 node_modules
 .DS_Store
+.claude/ip-keywords.txt
+.claude/launch.json
