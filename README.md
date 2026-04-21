@@ -82,6 +82,6 @@ Work-vault content is **never committed** without passing the IP scrubber — Cl
 
 ## Deploy
 
-Push to `master` → GitHub Actions builds and pushes `dist/` to `gh-pages` → live at `lychan110.github.io` within ~60 seconds.
+Push to `master` → GitHub Actions builds and pushes `dist/` → live at `lychan110.github.io` within ~60 seconds.
 
 Never commit `dist/` or `.astro/` manually — both are build output and in `.gitignore`.

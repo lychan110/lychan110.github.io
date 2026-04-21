@@ -1,7 +1,7 @@
 ---
-// Nav — sticky, backdrop-blurred. Pass current="about"|"projects"|"publications" to activate underline.
+// Nav — sticky, backdrop-blurred. Pass current="about"|"publications"|"projects" to activate underline.
 interface Props {
-    current?: 'about' | 'projects' | 'publications';
+    current?: 'about' | 'publications' | 'projects';
 }
 const { current } = Astro.props;
 ---
@@ -27,10 +27,10 @@ const { current } = Astro.props;
                 <a href="/" class={`nav-item ${current === 'about' ? 'active' : ''}`}>About</a>
             </li>
             <li>
-                <a href="/projects" class={`nav-item ${current === 'projects' ? 'active' : ''}`}>Projects</a>
+                <a href="/#publications" class={`nav-item ${current === 'publications' ? 'active' : ''}`}>Pubs</a>
             </li>
             <li>
-                <a href="/#publications" class={`nav-item ${current === 'publications' ? 'active' : ''}`}>Pubs</a>
+                <a href="/projects" class={`nav-item ${current === 'projects' ? 'active' : ''}`}>Projects</a>
             </li>
         </ul>
         <button

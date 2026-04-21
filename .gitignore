@@ -8,5 +8,6 @@ dist
 .claude/ip-keywords.txt
 .claude/launch.json
 .remember/
+.superpowers/
 portfolio-scaffold/
 design_handoff_portfolio/
