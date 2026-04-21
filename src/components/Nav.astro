@@ -7,49 +7,39 @@ const { current } = Astro.props;
 ---
 
 <nav
-    class="sticky top-0 z-50 flex items-center justify-between px-page py-[22px] border-b border-rule"
-    style="background: var(--color-nav-bg); backdrop-filter: blur(6px);"
+    class="sticky top-0 z-50 flex items-center justify-between px-page border-b border-rule"
+    style="background: var(--color-nav-bg); backdrop-filter: blur(6px); min-height: 64px;"
 >
-    <!-- Logo -->
+    <!-- Logo: full name above sm, initials below -->
     <a
         href="/"
         class="font-display text-[22px] font-medium tracking-[-0.3px] text-ink
-               no-underline hover:text-teal transition-colors duration-150"
+               no-underline hover:text-teal transition-colors duration-150 shrink-0"
     >
-        Yu-Chin Chan
+        <span class="hidden sm:inline">Yu-Chin Chan</span>
+        <span class="sm:hidden">Y. (L.) C.</span>
     </a>
 
-    <!-- Right side: nav links + theme toggle -->
-    <div class="flex items-center gap-1">
-        <ul class="flex items-center gap-1 list-none m-0 p-0">
+    <!-- Right side: nav links + theme toggle, all baseline-aligned -->
+    <div class="flex items-center">
+        <ul class="flex items-center list-none m-0 p-0">
             <li>
-                <a href="/" class={`nav-item ${current === 'about' ? 'active' : ''}`}>
-                    About
-                </a>
+                <a href="/" class={`nav-item ${current === 'about' ? 'active' : ''}`}>About</a>
             </li>
             <li>
-                <a href="/projects" class={`nav-item ${current === 'projects' ? 'active' : ''}`}>
-                    Projects
-                </a>
+                <a href="/projects" class={`nav-item ${current === 'projects' ? 'active' : ''}`}>Projects</a>
             </li>
             <li>
-                <a href="/#publications" class={`nav-item ${current === 'publications' ? 'active' : ''}`}>
-                    Publications
-                </a>
+                <a href="/#publications" class={`nav-item ${current === 'publications' ? 'active' : ''}`}>Pubs</a>
             </li>
         </ul>
-
-        <!-- Theme toggle -->
         <button
             id="theme-toggle"
             aria-label="Toggle theme"
-            style="background:none;border:none;cursor:pointer;padding:4px 10px;
-                   font-size:14px;opacity:0.55;transition:opacity 150ms;
-                   color:var(--color-ink);"
-            onmouseover="this.style.opacity='1'"
-            onmouseout="this.style.opacity='0.55'"
+            class="nav-item"
+            style="background:none;border:none;cursor:pointer;"
         >
-            <span id="theme-icon">&#9790;</span>
+            <span id="theme-icon">☾</span>
         </button>
     </div>
 </nav>
