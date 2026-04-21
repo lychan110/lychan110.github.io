@@ -3,8 +3,10 @@
 // are currently rendered by About.astro.
 
 export const bio: string[] = [
-    'Research scientist working at the intersection of machine learning, physics-based simulation, and engineering design. PhD from Northwestern in computational metamaterials; now building ML and simulation workflows for industrial design problems.',
-    'Outside work: tinkering with desktop and mobile tooling, and writing fantasy fiction.',
+    // 'Research scientist working at the intersection of deep learning, physics-based simulation, and engineering design. PhD from Northwestern in computational metamaterials; now building AI and simulation workflows for industrial design problems.',
+    // 'Outside work: volunteering, tinkering with code, and dreaming of better worlds.',
+    'I\'m a researcher at heart, always dissecting systems, patterns, and behavior with curiosity and precision. I shape workflows, tools, and creative projects until they feel uniquely mine.',
+    'Outside work: I help craft experiences that bring people together, blending structure, culture, and imagination into the spaces I care about.'
 ];
 
 export interface Education {
@@ -50,9 +52,14 @@ export interface Experience {
 
 export const experience: Experience[] = [
     {
+        title:   'Simulation and Digital Twin Research Scientist — Siemens Corporation',
+        dates:   'January 2022 – Present',
+        summary: 'Creating agentic and generative workflows that leverage fast simulation digital twins to push the boundaries of engineering design.',
+    },
+    {
         title:   'Generative Design Intern — Siemens Corporate Technology',
         dates:   'June – September 2018',
-        summary: 'Accelerated topology optimization for large-scale industrial problems (US Patent Pending); implemented as Python software.',
+        summary: 'Accelerated topology optimization for large-scale industrial problems (US Patent); implemented as Python software.',
     },
 ];
 

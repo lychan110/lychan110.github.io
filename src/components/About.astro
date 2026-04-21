@@ -73,7 +73,7 @@ const { recentProjects = [] } = Astro.props;
                     Fig. 1 — Y.C.
                 </span>
                 <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
-                    Grandfather Mountain, NC
+                    Grandfather Mtn, NC
                 </span>
             </div>
         </div>
@@ -101,12 +101,13 @@ const { recentProjects = [] } = Astro.props;
                 <span class="font-mono text-[11px] tracking-[0.05em]">
                     <span class="opacity-55 mr-2">Email</span>
                     <a
-                        href="mailto:lychan115@gmail.com"
+                        id="contact-email"
+                        href="#"
+                        data-u="lychan115"
+                        data-d="gmail.com"
                         class="border-b border-teal pb-[2px] text-ink hover:text-teal
                                transition-colors no-underline"
-                    >
-                        lychan115@gmail.com
-                    </a>
+                    ></a>
                 </span>
                 <span class="font-mono text-[11px] tracking-[0.05em]">
                     <span class="opacity-55 mr-2">GitHub</span>
@@ -324,6 +325,14 @@ const { recentProjects = [] } = Astro.props;
 </section>
 
 <script>
+    // Assemble email from split data attributes — keeps the full address out of HTML source
+    const emailEl = document.getElementById('contact-email') as HTMLAnchorElement | null;
+    if (emailEl) {
+        const addr = emailEl.dataset.u + '@' + emailEl.dataset.d;
+        emailEl.href = 'mailto:' + addr;
+        emailEl.textContent = addr;
+    }
+
     const portrait = document.getElementById('portrait-wrap');
     const bio = document.getElementById('bio-reveal');
     if (portrait && bio) {
