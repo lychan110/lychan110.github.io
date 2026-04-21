@@ -1,0 +1,38 @@
+---
+title: "Data-Driven Metamaterials Design"
+date: "2020-08-01"
+status: "complete"
+category: "academic"
+tags: ["machine-learning", "topology-optimization", "metamaterials", "python"]
+summary: "Automated dataset curation for scalable data-driven design of mechanical metamaterials using shape descriptors and diversity-aware sampling."
+demo_url: ""
+repo_url: ""
+paper_url: "https://arxiv.org/abs/2006.02142"
+image: ""
+featured: true
+---
+
+## Overview
+
+Mechanical metamaterials derive their properties from geometric structure rather than
+material composition, making the design space enormous and difficult to explore manually.
+This project developed METASET, a method for automatically curating diverse, representative
+training datasets for machine learning models in metamaterials design.
+
+## Approach
+
+The core insight is that shape diversity in the dataset directly controls the quality of
+the learned surrogate model. We used Laplace-Beltrami spectral descriptors as
+geometry fingerprints, then applied determinantal point process sampling to select
+maximally diverse subsets. This replaces ad-hoc data collection with a principled,
+automated pipeline.
+
+## Outcomes
+
+Demonstrated that small, diversity-aware datasets outperform larger random ones for
+training property predictors. The method generalizes to any shape-parameterized design
+space. Published at ASME IDETC 2020, received Paper of Distinction.
+
+## Skills & Tools
+
+Python, NumPy, scikit-learn, topology optimization, spectral geometry, Gaussian process regression

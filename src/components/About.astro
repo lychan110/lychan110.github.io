@@ -1,0 +1,53 @@
+---
+// About — data comes from src/data/about.ts so content edits don't touch this component.
+import { bio, education, awards } from '../data/about';
+---
+
+<section id="about" class="py-24 px-8 md:px-16 lg:px-24">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+
+        <!-- Bio -->
+        <div class="lg:col-span-2">
+            <div class="section-rule mb-8">
+                <h2 class="font-display text-4xl text-paper mb-1">About</h2>
+            </div>
+            <div class="text-paper/70 leading-relaxed space-y-4 max-w-prose">
+                {bio.map(paragraph => <p>{paragraph}</p>)}
+            </div>
+        </div>
+
+        <!-- Sidebar: Education + Awards -->
+        <div class="space-y-10">
+            <div>
+                <h3 class="font-mono text-2xs tracking-widest uppercase text-teal mb-4">
+                    Education
+                </h3>
+                <ul class="space-y-4">
+                    {education.map(e => (
+                        <li class="text-sm">
+                            <p class="text-paper font-medium">{e.school}</p>
+                            <p class="text-muted">{e.degree}</p>
+                            <p class="text-muted/60 text-xs font-mono">{e.years}</p>
+                            <p class="text-muted/60 text-xs">{e.note}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="font-mono text-2xs tracking-widest uppercase text-teal mb-4">
+                    Awards
+                </h3>
+                <ul class="space-y-2">
+                    {awards.map(a => (
+                        <li class="text-sm">
+                            <span class="text-paper/80">{a.title}</span>
+                            <span class="text-muted/60 font-mono text-xs ml-2">{a.year}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>

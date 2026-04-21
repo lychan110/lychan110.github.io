@@ -1,0 +1,100 @@
+/* ─── Fonts ──────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ───────────────────────────────────────────────── */
+@layer base {
+    :root {
+        --color-ink:      #1E1E1C;
+        --color-paper:    #E8E6E3;
+        --color-teal:     #8CC1DB;
+        --color-teal-dim: #5A99B8;
+        --color-muted:    #6B6B69;
+    }
+
+    html {
+        @apply scroll-smooth;
+        background-color: var(--color-ink);
+        color: var(--color-paper);
+    }
+
+    body {
+        @apply font-body antialiased;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    ::selection {
+        background-color: var(--color-teal);
+        color: var(--color-ink);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar        { width: 6px; }
+    ::-webkit-scrollbar-track  { background: var(--color-ink); }
+    ::-webkit-scrollbar-thumb  { background: var(--color-ink-3, #3A3A38); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-teal-dim); }
+}
+
+/* ─── Components ─────────────────────────────────────────── */
+@layer components {
+    /* Section divider — thin teal left border */
+    .section-rule {
+        @apply border-l-2 border-teal pl-5;
+    }
+
+    /* Tag chip */
+    .tag {
+        @apply font-mono text-2xs tracking-widest uppercase
+               px-2 py-0.5 rounded-sm
+               bg-ink-2 text-teal border border-teal/20
+               transition-colors duration-200;
+    }
+    .tag:hover, .tag.active {
+        @apply bg-teal/10 border-teal/50;
+    }
+    .tag.active {
+        @apply text-paper;
+    }
+
+    /* Project card */
+    .project-card {
+        @apply relative bg-ink-2 border border-ink-3
+               rounded overflow-hidden
+               transition-all duration-300 ease-out
+               cursor-pointer;
+    }
+    .project-card:hover {
+        @apply border-teal/40 -translate-y-1;
+        box-shadow: 0 12px 40px rgba(140, 193, 219, 0.08);
+    }
+
+    /* Nav link */
+    .nav-link {
+        @apply text-muted hover:text-paper font-mono text-2xs
+               tracking-widest uppercase transition-colors duration-200;
+    }
+    .nav-link.active {
+        @apply text-teal;
+    }
+
+    /* Publication entry */
+    .pub-entry {
+        @apply border-l-2 border-ink-3 pl-4
+               hover:border-teal transition-colors duration-200;
+    }
+
+    /* Staggered animation helpers */
+    .animate-stagger > * {
+        @apply opacity-0 animate-fade-up;
+    }
+    .animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+    .animate-stagger > *:nth-child(2) { animation-delay: 80ms; }
+    .animate-stagger > *:nth-child(3) { animation-delay: 160ms; }
+    .animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
+    .animate-stagger > *:nth-child(5) { animation-delay: 320ms; }
+    .animate-stagger > *:nth-child(6) { animation-delay: 400ms; }
+}

@@ -1,0 +1,85 @@
+---
+// Author: Yu-Chin Chan
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map(p => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const links = [
+    project.data.paper_url && { label: 'Paper',  href: project.data.paper_url },
+    project.data.repo_url  && { label: 'Repo',   href: project.data.repo_url  },
+    project.data.demo_url  && { label: 'Demo',   href: project.data.demo_url  },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<Base title={`${project.data.title} — Yu-Chin Chan`}
+     description={project.data.summary}>
+    <Nav />
+    <main class="pt-28 pb-24 px-8 md:px-16 max-w-3xl mx-auto">
+
+        <!-- Breadcrumb -->
+        <div class="mb-10">
+            <a href="/projects"
+               class="font-mono text-2xs tracking-widest uppercase text-muted
+                      hover:text-paper transition-colors">
+                ← Projects
+            </a>
+        </div>
+
+        <!-- Header -->
+        <div class="section-rule mb-10">
+            <span class="font-mono text-2xs tracking-widest uppercase text-teal">
+                {project.data.category} · {project.data.date.slice(0, 4)} · {project.data.status}
+            </span>
+            <h1 class="font-display text-5xl md:text-6xl text-paper mt-2 leading-tight">
+                {project.data.title}
+            </h1>
+            <p class="text-paper/60 text-base mt-4 leading-relaxed">
+                {project.data.summary}
+            </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-1.5 mb-8">
+            {project.data.tags.map((tag: string) => (
+                <span class="tag text-[10px]">{tag}</span>
+            ))}
+        </div>
+
+        <!-- Links -->
+        {links.length > 0 && (
+            <div class="flex flex-wrap gap-3 mb-12">
+                {links.map(({ label, href }) => (
+                    <a href={href}
+                       target="_blank"
+                       rel="noopener"
+                       class="font-mono text-2xs tracking-widest uppercase
+                              text-teal border border-teal/40 px-4 py-2
+                              hover:bg-teal/10 transition-colors">
+                        {label} ↗
+                    </a>
+                ))}
+            </div>
+        )}
+
+        <!-- MDX body -->
+        <article class="prose prose-invert prose-lg max-w-none
+                        prose-headings:font-display prose-headings:font-light
+                        prose-headings:text-paper prose-p:text-paper/70
+                        prose-a:text-teal prose-a:no-underline hover:prose-a:underline
+                        prose-code:text-teal prose-code:font-mono
+                        prose-strong:text-paper prose-hr:border-ink-3">
+            <Content />
+        </article>
+
+    </main>
+    <Footer />
+</Base>

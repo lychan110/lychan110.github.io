@@ -1,12 +1,12 @@
 ---
 name: sync-from-obsidian
-description: Pull a project or CV entry from an Obsidian vault note (personal or work) into this site's content/ directory, scrubbing IP/secrets for work-vault sources. Use when the user references an Obsidian note by path, title, or says "sync from my vault", "import this note", or similar.
+description: Pull a project or CV entry from an Obsidian vault note (personal or work) into this site's src/content/ directory, scrubbing IP/secrets for work-vault sources. Use when the user references an Obsidian note by path, title, or says "sync from my vault", "import this note", or similar.
 disable-model-invocation: true
 ---
 
 # sync-from-obsidian
 
-Copy a note from `~/Obsidian/personal` ("Lenya's brain") or `~/Obsidian/work` (IP-bearing) into the site's `content/` schema.
+Copy a note from the user's Obsidian vaults under `C:\Users\lycha\Desktop\projects\Obsidian` — the personal vault ("Lenya's brain") or the work vault (IP-bearing) — into the site's `src/content/` (MDX) or `src/data/about.ts` schema.
 
 **User-invocable only.** Side effects on real files — don't trigger automatically.
 
@@ -28,21 +28,26 @@ Use Read or the filesystem MCP. Parse frontmatter + body.
 
 Obsidian notes typically have rich metadata. Pick only what the site schema defines (see `/add-entry` skill). Typical mapping:
 
-| Obsidian field | Site field | Notes |
+For a project (writing to `src/content/projects/<slug>.mdx`):
+
+| Obsidian field | Site frontmatter field | Notes |
 |---|---|---|
 | `title` / H1 | `title` | |
-| `date` / `created` | used for `order` | higher = newer; recent entries get higher `order` |
+| `date` / `created` | `date` | "YYYY-MM-DD" format |
 | `tags` | `tags` | drop any internal/client tags |
-| cover image link | `image` | copy the image file into `src/assets/img/` and rewrite the path |
+| cover image link | `image` | copy image into `public/assets/img/` and set to `/assets/img/<name>` |
 | body | body | strip Obsidian-isms: `[[wikilinks]]`, `#tag` inlines, `^block-refs`, Dataview blocks, frontmatter comments |
-| — | `source_vault` | set to `personal` or `work` per source |
-| — | `status` | `draft` if any content still needs review; `published` once clean |
+| — | `status` | map to `complete` / `ongoing` / `archived` |
+| — | `category` | `personal` / `academic` / `work` per source vault + content |
+| — | `summary` | write a ≤300-char one-liner for the grid card (required) |
+
+**Do NOT write a `slug:` field** — it's reserved in Astro and derived from the filename.
 
 ### 4. Rewrite prose
-Obsidian notes are often informal/long. The site needs 1–3 sentences per project. Condense without editorializing. Preserve technical substance; drop meta-commentary ("TODO: rewrite this section", "ask advisor about X").
+Obsidian notes are often informal/long. The `summary` must be ≤300 chars; the MDX body can be longer but should be focused. Preserve technical substance; drop meta-commentary ("TODO: rewrite this section", "ask advisor about X"). Use H2 (`##`) for sections — H1 is taken by the frontmatter title.
 
-### 5. Write to `content/` and rebuild
-Follow `/add-entry` from step 5 onward.
+### 5. Write the file
+Follow `/add-entry` from step 5 onward. For projects that isn't a rebuild — Astro dev HMR picks up the new MDX file automatically.
 
 ### 6. Confirm with user
 Show: source path, target path, status (draft/published), any scrubber findings that were accepted/redacted.

@@ -1,61 +1,80 @@
 # Repo context for Claude
 
-Personal mini-CV / portfolio site at **lychan110.github.io**. Content grows organically, fed by Claude from two Obsidian vaults:
+Personal mini-CV / portfolio site served from `yuchinchan.com` (GitHub Pages via GitHub Actions). Content grows organically, fed by Claude from two Obsidian vaults at `C:\Users\lycha\Desktop\projects\Obsidian`:
 
 - **Personal vault** ("Lenya's brain") — freely publishable.
 - **Work vault** — IP-bearing. Content from here MUST be scrubbed before it enters this repo. Never commit anything from the work vault without the `ip-scrubber` subagent having passed on it.
 
-## Stack (legacy — slated for polish)
+## Stack
 
-Static site: Pug → HTML, SCSS → CSS, plain JS. Build via Node scripts in `scripts/`. Bootstrap 4.5 + jQuery + bibtex-js (via an old rawgit CDN that's sunset — vendor this when doing frontend polish). No framework, no server.
+**Astro 4** (static site) + **Tailwind CSS** + **React** (islands only, for interactivity) + **MDX** (project content) + **GitHub Actions** (build + deploy to GitHub Pages).
 
-Build: `npm run build`. Dev server: `npm start` (browser-sync on :3000). Preview via the `dev` config in `.claude/launch.json` — always use `preview_start`, not Bash, to run it.
+- `astro.config.mjs`, `tailwind.config.mjs`, `tsconfig.json` — framework config
+- `src/pages/` — routes (`index.astro`, `projects.astro`, `projects/[slug].astro`)
+- `src/components/` — `.astro` components and one `.tsx` React island (`ProjectGrid.tsx` for the filterable project grid + modal)
+- `src/layouts/Base.astro` — page shell
+- `src/styles/global.css` — Tailwind + custom utilities + font declarations
+- `src/content/projects/*.mdx` — one project per MDX file, schema enforced by `src/content/config.ts`
+- `src/data/about.ts` — bio, education, awards, experience, talks (typed data)
+- `src/assets/ychan_pubs.bib` — BibTeX, parsed at build by `scripts/parse-bib.js` into `public/data/publications.json`
+- `public/` — static assets served as-is (images, favicon, CNAME, generated JSON)
 
-## Content architecture (the important part)
+Build: `npm run build` (runs `parse-bib.js` → `astro build`). Dev: `npm run dev` (Astro dev server with HMR on :4321). Preview via the `dev` config in `.claude/launch.json` — always use `preview_start`, not Bash, to run it.
 
-All user-facing content lives in `content/`. Templates in `src/pug/` iterate over it. **To add/update an entry, edit a data file — do not touch templates.**
+**No jQuery, no Bootstrap, no SCSS, no Pug.** React is used ONLY where the page needs client-side interactivity (the project grid filter + modal). Everything else is static Astro.
 
-```
-content/
-  cv.yml              # site metadata, about, education, awards, experience, talks, social links
-  projects/*.md       # one project per file, YAML frontmatter + markdown body
-  publications.bib    # → src/assets/ychan_pubs.bib (rendered client-side by bibtex-js)
-```
+## Content schemas
 
-Note: publications still live at `src/assets/ychan_pubs.bib` because bibtex-js fetches it at runtime. When adding a publication, edit that `.bib` file.
+### Projects (`src/content/projects/<slug>.mdx`)
 
-### Project frontmatter schema
+Frontmatter validated by Zod in `src/content/config.ts`:
 
 ```yaml
 ---
-title: string                # required
-image: string                # required, path relative to dist/ (e.g. assets/img/foo.png)
-align: left | right          # which side the image sits on in the two-col layout
-order: number                # sort key, ascending
-status: published | draft    # draft entries are not rendered
-source_vault: personal | work
-tags: [string, ...]
+title:     string                              # required
+date:      "YYYY-MM-DD"                        # required
+status:    "complete" | "ongoing" | "archived" # required
+category:  "personal" | "academic" | "work"    # required
+tags:      [string, ...]                       # required
+summary:   string (≤ 300 chars)                # required, shown on grid card
+demo_url:  "" | https-url                      # optional
+repo_url:  "" | https-url                      # optional
+paper_url: "" | https-url                      # optional; DOI or arXiv fine
+image:     "" | "/assets/img/foo.png"          # optional, path relative to public/
+featured:  boolean                             # default false
 ---
 
-One-paragraph description (plain markdown text; kept short, used as the project card body).
+Markdown / MDX body. Use H2 (`##`) as the top headers (H1 is the title from frontmatter).
+Renders on the dedicated project page at /projects/<slug>/.
 ```
 
-### cv.yml schema
+Slug is derived from the filename (`metaset.mdx` → `metaset`). **Do not add a `slug:` field** — it's reserved by Astro.
 
-Top-level keys: `site`, `about`, `notice` (optional), `education[]`, `awards[]`, `experience[]`, `talks[]`, `links[]`. See the file for field names. HTML is allowed inside `about` and `notice` (rendered with `!=`).
+### About data (`src/data/about.ts`)
 
-## How rendering works
+Typed TS module exporting `bio`, `education`, `awards`, `experience`, `talks`. `About.astro` currently renders `bio`, `education`, `awards`. Experience and talks are defined in data but not yet rendered (UI work pending — task #6).
 
-`scripts/load-content.js` reads `content/` into a `{ cv, projects }` object. `scripts/render-pug.js` passes it as Pug locals. `src/pug/index.pug` iterates with `each`. Drafts and ordering are handled in the loader.
+### Publications (`src/assets/ychan_pubs.bib`)
 
-## Conventions for Claude
-
-- **Adding a project**: use the `/add-entry` skill (or create `content/projects/<slug>.md` directly following the schema above). Do NOT edit `index.pug` for content changes.
-- **Syncing from Obsidian**: use `/sync-from-obsidian`. If the source is the work vault, the `ip-scrubber` subagent must review before anything is written here.
-- **Never commit**: `.env*`, anything from the work vault that hasn't been scrubbed, internal URLs, client names, unredacted figures.
-- **After editing content**: the PostToolUse hook auto-runs `npm run build:pug`. If it didn't fire, run it manually.
-- **Frontend polish is a separate stream of work** from content updates — don't mix them in one change.
+Standard BibTeX. `scripts/parse-bib.js` extracts the fields Publications.astro cares about (title, authors, year, venue, doi, url) into JSON at build time. To add a publication, append a BibTeX entry and run `npm run build` (or it'll be picked up on the next CI build).
 
 ## Deploy
 
-`master` branch → GitHub Pages via `CNAME`. `dist/` is committed (that's what Pages serves).
+`.github/workflows/deploy.yml` builds on push to main and deploys `dist/` to GitHub Pages. `public/CNAME` → `yuchinchan.com`.
+
+## Conventions for Claude
+
+- **Adding a project**: use the `/add-entry` skill (or drop a new MDX file in `src/content/projects/`). Do NOT edit `ProjectGrid.tsx` or `projects.astro` for content changes.
+- **Adding an award / talk / experience entry**: edit `src/data/about.ts`.
+- **Adding a publication**: append a BibTeX entry to `src/assets/ychan_pubs.bib`. No other files.
+- **Syncing from Obsidian**: use `/sync-from-obsidian`. For work-vault sources the `ip-scrubber` subagent must review before anything is written.
+- **Never commit**: `.env*`, anything from the work vault that hasn't been scrubbed, internal URLs, client names, unredacted figures.
+- **Never commit `dist/` or `.astro/`** — both are build output and are in `.gitignore`.
+- **Astro dev server has HMR** — MDX and data edits hot-reload. No manual rebuild needed during development.
+- **Visual redesign work** is a separate stream — don't bundle it with content changes.
+
+## Things deliberately chosen (don't swap without discussion)
+
+- Colors: `ink #1E1E1C`, `paper #E8E6E3`, `teal #8CC1DB` (defined in `tailwind.config.mjs`).
+- Typography: Cormorant Garamond (display) + Lato (body) + JetBrains Mono (labels).
+- React islands only where interactive — home page ships zero client JS by design.

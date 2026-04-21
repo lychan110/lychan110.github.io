@@ -1,6 +1,6 @@
 ---
 name: add-entry
-description: Add a new entry (project, publication, award, talk, experience, education) to this CV site. Use when the user says anything like "add a project", "new publication", "I got a new award", "add talk", or when syncing content from an Obsidian vault note into the site.
+description: Add a new entry (project, publication, award, talk, experience, education) to this Astro portfolio site. Use when the user says anything like "add a project", "new publication", "I got a new award", "add talk", or when syncing content from an Obsidian vault note into the site.
 ---
 
 # add-entry
@@ -11,58 +11,67 @@ Add a single content entry to the site. Entry types: **project, publication, awa
 
 | Type | Where it lives | How to add |
 |---|---|---|
-| project | `content/projects/<slug>.md` | Create new file, frontmatter + one-paragraph body (see project schema below) |
-| publication | `src/assets/ychan_pubs.bib` | Append a BibTeX entry; rendered client-side by bibtex-js |
-| award | `content/cv.yml` → `awards:` | Prepend an item (most recent first) |
-| talk | `content/cv.yml` → `talks:` | Prepend an item (most recent first) |
-| experience | `content/cv.yml` → `experience:` | Prepend an item (most recent first) |
-| education | `content/cv.yml` → `education:` | Append (chronological) |
+| project | `src/content/projects/<slug>.mdx` | Create new file, frontmatter + MDX body (see schema below) |
+| publication | `src/assets/ychan_pubs.bib` | Append a BibTeX entry; `scripts/parse-bib.js` picks it up at build |
+| award | `src/data/about.ts` → `awards` | Prepend an item (most recent first) |
+| talk | `src/data/about.ts` → `talks` | Prepend an item (most recent first) |
+| experience | `src/data/about.ts` → `experience` | Prepend an item (most recent first) |
+| education | `src/data/about.ts` → `education` | Append (chronological) |
 
-## Schemas
+## Project schema (`src/content/projects/<slug>.mdx`)
 
-### project (`content/projects/<slug>.md`)
+Validated by Zod in `src/content/config.ts`. **Do not add a `slug:` field** — Astro derives it from the filename.
 
 ```yaml
 ---
-title: string              # required
-image: string              # required, e.g. assets/img/foo.png (must exist in src/assets/img/)
-align: left | right        # image side in two-col layout; alternate from previous project for visual rhythm
-order: number              # ascending sort key; use (highest existing + 1) unless user specifies
-status: published | draft  # default published; use draft if unsure or still redacting
-source_vault: personal | work
-tags: [string, ...]
+title:     string                              # required
+date:      "YYYY-MM-DD"                        # required
+status:    "complete" | "ongoing" | "archived" # required
+category:  "personal" | "academic" | "work"    # required
+tags:      [string, ...]                       # required
+summary:   string (≤ 300 chars)                # required, shown on grid card
+demo_url:  "" | https-url                      # optional
+repo_url:  "" | https-url                      # optional
+paper_url: "" | https-url                      # optional
+image:     "" | "/assets/img/foo.png"          # optional, path relative to public/
+featured:  boolean                             # default false
 ---
 
-One short paragraph, ~1–3 sentences. Plain prose, no markdown formatting inside.
+## Overview
+Short MDX body. Use H2 (`##`) for top-level sections — H1 is the frontmatter title.
+Freeform markdown + JSX components if needed. Rendered on /projects/<slug>/.
 ```
 
-Slug: lowercase, hyphenated, derived from title. Keep it stable — it's the filename.
+Filename convention: lowercase, hyphenated slug derived from title (e.g. `data-driven-metamaterials.mdx`). The filename IS the URL slug — keep it stable after publish.
 
-### award / talk / experience / education
+## about.ts schemas
 
-See `content/cv.yml` for examples. Copy an existing item and modify — this guarantees the schema stays consistent.
+Open `src/data/about.ts` and extend the relevant typed array. The interfaces are defined in that file:
 
-- `award`: `title`, `source`, `date`
-- `talk`: `title`, `venue`, `location` (optional), `date`
-- `experience`: `title`, `dates`, `summary`
-- `education`: `institution`, `degree`, `dates`, `notes[]`
+- `Award`: `{ title, year }`
+- `Talk`: `{ title, venue, location?, date }`
+- `Experience`: `{ title, dates, summary }`
+- `Education`: `{ school, degree, years, note }`
 
-### publication (BibTeX)
+Copy an existing item and modify — this keeps the shape consistent.
 
-Append to `src/assets/ychan_pubs.bib`. Use the same entry type (`@article`, `@inproceedings`, etc.) and field order as existing entries in that file. Required fields vary by type — match the existing style.
+## Publication (BibTeX)
+
+Append to `src/assets/ychan_pubs.bib`. Match the entry type (`@article`, `@inproceedings`, etc.) and field style of existing entries. `scripts/parse-bib.js` reads: `title`, `author`, `year`, `journal`/`booktitle`, `doi`, `url`.
 
 ## Workflow
 
 1. Identify type from user input. If ambiguous, ask.
-2. Gather missing required fields (title, date, etc.). Ask one consolidated question, not one-at-a-time.
-3. If an image is needed (project) and not provided, ask for a path or flag a TODO in the frontmatter.
+2. Gather missing required fields. Ask one consolidated question, not one-at-a-time.
+3. For a project: derive slug from the title. Confirm with user if the title is long/ambiguous.
 4. **If source is the work vault**: stop and invoke the `ip-scrubber` subagent on the proposed content before writing.
-5. Write the file (or edit `cv.yml` / `.bib`).
-6. The PostToolUse hook rebuilds Pug automatically. If the hook isn't configured, run `npm run build:pug`.
-7. Confirm with the user; mention the file path and whether draft/published.
+5. Write the file.
+6. No rebuild needed during dev — Astro HMR picks up MDX and data changes. For production, `npm run build` runs on push via GitHub Actions.
+7. Confirm with user; mention the file path and (for projects) the URL where it will appear.
 
 ## Guardrails
 
-- Don't touch `src/pug/*.pug` for content changes. Templates are data-driven.
-- Don't bulk-add. One entry per invocation keeps review easy.
+- Don't touch `src/components/`, `src/pages/`, or `src/layouts/` for content changes. Components iterate over data.
+- Don't add a `slug:` frontmatter field to projects. It's reserved.
+- One entry per invocation. Bulk adds hide mistakes.
 - If the user hands you an Obsidian note, use `/sync-from-obsidian` instead — it handles scrubbing.

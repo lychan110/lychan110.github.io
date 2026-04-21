@@ -1,0 +1,102 @@
+[
+  {
+    "key": "Wang2020lb",
+    "type": "article",
+    "title": "Data-driven metamaterial design with Laplace-Beltrami spectrum as “shape-DNA”",
+    "authors": "Liwei Wang, Yu-Chin Chan, Zhao Liu, Ping Zhu, Wei Chen",
+    "year": "2020",
+    "venue": "Structural and Multidisciplinary Optimization",
+    "doi": "10.1007/s00158-020-02523-5",
+    "url": "https://doi.org/10.1007/s00158-020-02523-5"
+  },
+  {
+    "key": "Li2020",
+    "type": "article",
+    "title": "A novel gripper for multiaxial mechanical testing of microtubes at elevated temperatures",
+    "authors": "Lin Li, Yu-Chin Chan, Gracious Ngaile, Tasnim Hassan",
+    "year": "2020",
+    "venue": "Review of Scientific Instruments",
+    "doi": "10.1063/5.0007150",
+    "url": "https://doi.org/10.1063/5.0007150"
+  },
+  {
+    "key": "2006.02142",
+    "type": "misc",
+    "title": "METASET: Exploring Shape and Property Spaces for Data-Driven Metamaterials Design",
+    "authors": "Yu-Chin Chan, Faez Ahmed, Liwei Wang, Wei Chen",
+    "year": "2020",
+    "venue": "",
+    "doi": "",
+    "url": "https://arxiv.org/abs/2006.02142"
+  },
+  {
+    "key": "2006.15274",
+    "type": "misc",
+    "title": "Deep Generative Modeling for Mechanistic-based Learning and Design of Metamaterial Systems",
+    "authors": "Liwei Wang, Yu-Chin Chan, Faez Ahmed, Zhao Liu, Ping Zhu, Wei Chen",
+    "year": "2020",
+    "venue": "",
+    "doi": "",
+    "url": "https://arxiv.org/abs/2006.15274"
+  },
+  {
+    "key": "chan2019robust",
+    "type": "article",
+    "title": "Robust topology optimization of multi-material lattice structures under material and load uncertainties",
+    "authors": "Chan Y, Shintani K, Chen W",
+    "year": "2019",
+    "venue": "Frontiers of Mechanical Engineering",
+    "doi": "10.1007/s11465-019-0531-4",
+    "url": ""
+  },
+  {
+    "key": "Bostanabad2019gaussian",
+    "type": "inproceedings",
+    "title": "Gaussian Process Emulation for Big Data in Data-Driven Metamaterials Design",
+    "authors": "Bostanabad R, Chan Y, Wang L, Zhu P, Chen W",
+    "year": "2019",
+    "venue": "ASME 2019 IDETC/CIE",
+    "doi": "10.1115/DETC2019-98027",
+    "url": ""
+  },
+  {
+    "key": "bostanabad2019globally",
+    "type": "article",
+    "title": "Globally Approximate Gaussian Processes for Big Data with Application to Data-Driven Metamaterials Design",
+    "authors": "Bostanabad R, Chan Y, Wang L, Zhu P, Chen W",
+    "year": "2019",
+    "venue": "Journal of Mechanical Design",
+    "doi": "10.1115/1.4044257",
+    "url": "https://mechanicaldesign.asmedigitalcollection.asme.org/article.aspx?articleid=2738740"
+  },
+  {
+    "key": "yan2018data",
+    "type": "article",
+    "title": "Data-Driven Prediction of Mechanical Properties in Support of Rapid Certification of Additively Manufactured Alloys",
+    "authors": "Yan F, Chan Y, Saboo A, Shah J, Olson G, Chen W",
+    "year": "2018",
+    "venue": "Computer Modeling in Engineering & Sciences",
+    "doi": "10.31614/cmes.2018.04452",
+    "url": ""
+  },
+  {
+    "key": "tao2017enhanced",
+    "type": "inproceedings",
+    "title": "Enhanced Gaussian process metamodeling and collaborative optimization for vehicle suspension design optimization",
+    "authors": "Tao S, Shintani K, Bostanabad R, Chan Y, Yang G, Meingast H, Chen W",
+    "year": "2017",
+    "venue": "ASME 2017 IDETC/CIE",
+    "doi": "10.1115/detc2017-67976",
+    "url": ""
+  },
+  {
+    "key": "shintani2017robust",
+    "type": "inproceedings",
+    "title": "Robust Multi-material Topology Optimization for Lattice Structure Under Material Uncertainties",
+    "authors": "Shintani K, Chan Y, Chen W",
+    "year": "2017",
+    "venue": "World Congress of Structural and Multidisciplinary Optimisation",
+    "doi": "10.1007/978-3-319-67988-4_84",
+    "url": ""
+  }
+]

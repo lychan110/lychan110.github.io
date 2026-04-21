@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ProjectGrid from '../components/ProjectGrid';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+
+// Serialize for React island
+const projects = allProjects
+    .map(p => ({
+        slug:      p.slug,
+        ...p.data,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date)); // newest first
+---
+
+<Base title="Projects — Yu-Chin Chan">
+    <Nav />
+    <main class="pt-28 pb-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
+
+        <div class="section-rule mb-12">
+            <h1 class="font-display text-5xl text-paper mb-1">Projects</h1>
+            <p class="font-mono text-2xs tracking-widest uppercase text-muted">
+                Personal · Academic · Professional
+            </p>
+        </div>
+
+        <!-- React island: filterable grid -->
+        <ProjectGrid client:load projects={projects} />
+
+    </main>
+    <Footer />
+</Base>
