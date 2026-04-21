@@ -34,22 +34,24 @@ const { recentProjects = [] } = Astro.props;
             class="font-display font-normal leading-[0.95] tracking-tight text-ink max-w-[1000px]"
             style="font-size: clamp(56px, 8.6vw, 104px); letter-spacing: clamp(-1.4px, -0.18vw, -2.4px);"
         >
-            Researcher, <em>ponderer,</em><br />
-            and <em class="text-teal">solution-builder.</em>
+            Researcher, <em>tinkerer,</em><br />
+            and <em class="text-teal">worldbuilder.</em>
         </h1>
     </section>
 
     <!-- Bio + Portrait -->
     <section class="px-page pt-[40px] pb-[36px] relative z-10">
     <div
-        class="grid gap-[56px]"
-        style="grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);"
+        id="portrait-wrap"
+        class="grid gap-[24px] md:gap-[56px]
+               [grid-template-columns:110px_1fr]
+               md:[grid-template-columns:minmax(220px,300px)_minmax(0,1fr)]"
     >
         <!-- Portrait -->
         <div>
             <div
                 class="relative overflow-hidden"
-                style="aspect-ratio: 4/5; box-shadow: 0 1px 0 #1E1E1C, 0 18px 40px -24px rgba(0,0,0,0.35);"
+                style="aspect-ratio: 4/5; box-shadow: 0 1px 0 var(--color-ink), 0 18px 40px -24px rgba(0,0,0,0.35);"
             >
                 <img
                     src="/assets/img/portrait.jpg"
@@ -77,7 +79,7 @@ const { recentProjects = [] } = Astro.props;
         </div>
 
         <!-- Bio -->
-        <div class="flex flex-col justify-center gap-5">
+        <div id="bio-reveal" class="bio-animate flex flex-col justify-center gap-5">
             <!-- Italic lead -->
             {bio.length > 0 && (
                 <p
@@ -320,3 +322,20 @@ const { recentProjects = [] } = Astro.props;
 
     </div>
 </section>
+
+<script>
+    const portrait = document.getElementById('portrait-wrap');
+    const bio = document.getElementById('bio-reveal');
+    if (portrait && bio) {
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    bio.classList.add('is-visible');
+                    io.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+        io.observe(portrait);
+    }
+</script>

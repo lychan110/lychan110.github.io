@@ -202,6 +202,17 @@ html.dark {
     .card-hover:hover .card-title { color: var(--color-teal); }
     .card-title { transition: color 200ms; }
 
+    /* Bio scroll reveal */
+    .bio-animate {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 350ms ease, transform 350ms ease;
+    }
+    .bio-animate.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     /* MDX prose overrides */
     .prose-editorial {
         --tw-prose-body:          var(--color-ink);
