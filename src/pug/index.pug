@@ -9,11 +9,9 @@ head
   // Font Awesome icons (free version)
   script(src='https://use.fontawesome.com/releases/v5.13.0/js/all.js' crossorigin='anonymous')
   // Google fonts
-  link(href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet')
-  link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
-  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato')
-  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat')
-  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700')
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Nunito:wght@200;300;400;600;700;800;900&family=Roboto:wght@100;300;400;500;700&family=Varela+Round&display=swap')
   // Core theme CSS (includes Bootstrap)
   link(href='css/styles.css' rel='stylesheet')
 // Navigation
@@ -211,5 +209,5 @@ script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.ea
 script(src='js/scripts.js')
 script(src='js/custom_cv.js')
 script(src='js/bs-animation.js')
-script(type='text/javascript' src='https://cdn.rawgit.com/pcooksey/bibtex-js/5ccf967/src/bibtex_js.js')
+script(src='js/vendor/bibtex_js.js')
 bibtex(src='assets/ychan_pubs.bib')

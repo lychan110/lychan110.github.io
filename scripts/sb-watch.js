@@ -8,7 +8,7 @@ const renderPug = require('./render-pug');
 const renderScripts = require('./render-scripts');
 const renderSCSS = require('./render-scss');
 
-const watcher = chokidar.watch('src', {
+const watcher = chokidar.watch(['src', 'content'], {
     persistent: true,
 });
 
@@ -58,6 +58,10 @@ function _processFile(filePath, watchEvent) {
 
     if (filePath.match(/src\/assets\//)) {
         return renderAssets();
+    }
+
+    if (filePath.match(/^content[\/\\]/) || filePath.match(/[\/\\]content[\/\\]/)) {
+        return _renderAllPug();
     }
 
 }
