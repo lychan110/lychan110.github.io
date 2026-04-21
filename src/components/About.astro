@@ -20,7 +20,13 @@ const { recentProjects = [] } = Astro.props;
 ---
 
 <!-- ── § Masthead ──────────────────────────────────────────── -->
-<section class="px-page pt-[56px] pb-0">
+<section
+    class="px-page pt-[56px] pb-0 relative"
+    style="background-image: url('/assets/img/mountain.jpg'); background-size: cover; background-position: center 40%;"
+>
+    <!-- Wash the photo down to a barely-there texture -->
+    <div class="absolute inset-0 pointer-events-none" style="background: rgba(232,230,227,0.94);"></div>
+    <div class="relative z-10">
     <p class="kicker mb-[14px]">— About · Updated 2026·04</p>
     <h1
         class="font-display font-normal leading-[0.95] tracking-tight text-ink max-w-[1000px]"
@@ -29,6 +35,7 @@ const { recentProjects = [] } = Astro.props;
         Designer, <em>researcher,</em><br />
         and <em class="text-teal">quiet tool-builder.</em>
     </h1>
+    </div>
 </section>
 
 <!-- ── § Bio + Portrait ───────────────────────────────────── -->
@@ -43,9 +50,8 @@ const { recentProjects = [] } = Astro.props;
                 class="relative overflow-hidden"
                 style="aspect-ratio: 4/5; box-shadow: 0 1px 0 #1E1E1C, 0 18px 40px -24px rgba(0,0,0,0.35);"
             >
-                <!-- Replace with real portrait: <img src="/assets/img/portrait.jpg" ... /> -->
                 <img
-                    src="/assets/img/IMG_20180922_162555.jpg"
+                    src="/assets/img/portrait.jpg"
                     alt="Yu-Chin Chan"
                     class="w-full h-full object-cover"
                     style="filter: saturate(0.92) contrast(1.02);"
