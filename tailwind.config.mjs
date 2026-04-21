@@ -5,23 +5,19 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Core palette
-                ink:        '#1E1E1C',
-                inkSoft:    '#3A3A37',
-                paper:      '#E8E6E3',
-                paperDeep:  '#DFDCD7',
-                paperSoft:  '#F2F0EC',
-                // Accent
-                teal:       '#2E8CA6',
-                tealPale:   '#8CC1DB',
-                tealDeep:   '#1F6B80',
-                // Alt accents (optional)
-                coral:      '#D88A73',
-                ochre:      '#C9A961',
-                sage:       '#9FB79B',
-                rust:       '#B5593C',
-                // Utility
-                muted:      '#6B6762',
+                ink:        'rgb(var(--tw-ink) / <alpha-value>)',
+                inkSoft:    'rgb(var(--tw-ink-soft) / <alpha-value>)',
+                paper:      'rgb(var(--tw-paper) / <alpha-value>)',
+                paperDeep:  'rgb(var(--tw-paper-deep) / <alpha-value>)',
+                paperSoft:  'rgb(var(--tw-paper-soft) / <alpha-value>)',
+                teal:       'rgb(var(--tw-teal) / <alpha-value>)',
+                tealPale:   'rgb(var(--tw-teal-pale) / <alpha-value>)',
+                tealDeep:   'rgb(var(--tw-teal-deep) / <alpha-value>)',
+                coral:      'rgb(var(--tw-coral) / <alpha-value>)',
+                ochre:      'rgb(var(--tw-ochre) / <alpha-value>)',
+                sage:       'rgb(var(--tw-sage) / <alpha-value>)',
+                rust:       'rgb(var(--tw-rust) / <alpha-value>)',
+                muted:      'rgb(var(--tw-muted) / <alpha-value>)',
             },
             fontFamily: {
                 display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

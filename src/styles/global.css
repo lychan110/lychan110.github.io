@@ -23,6 +23,39 @@
     --pad: 72px;
 }
 
+/* --- Tailwind-compatible RGB channels (space-separated, no #) --- */
+:root {
+    --tw-ink:        30 30 28;
+    --tw-ink-soft:   58 58 55;
+    --tw-paper:      232 230 227;
+    --tw-paper-deep: 223 220 215;
+    --tw-paper-soft: 242 240 236;
+    --tw-teal:       46 140 166;
+    --tw-teal-pale:  140 193 219;
+    --tw-teal-deep:  31 107 128;
+    --tw-muted:      107 103 98;
+    --tw-coral:      216 138 115;
+    --tw-ochre:      201 169 97;
+    --tw-sage:       159 183 155;
+    --tw-rust:       181 89 60;
+}
+
+html.dark {
+    --tw-ink:        232 230 227;
+    --tw-ink-soft:   190 186 180;
+    --tw-paper:      20 20 22;
+    --tw-paper-deep: 31 31 33;
+    --tw-paper-soft: 28 28 30;
+    --tw-teal:       127 198 224;
+    --tw-teal-pale:  169 215 230;
+    --tw-teal-deep:  62 155 181;
+    --tw-muted:      138 134 127;
+    --tw-coral:      228 164 147;
+    --tw-ochre:      216 189 130;
+    --tw-sage:       181 207 175;
+    --tw-rust:       217 127 92;
+}
+
 /* --- Design tokens: dark ---------------------------------- */
 html.dark {
     --color-ink:         #E8E6E3;
