@@ -19,27 +19,28 @@ interface Props {
 const { recentProjects = [] } = Astro.props;
 ---
 
-<!-- ── § Masthead ──────────────────────────────────────────── -->
-<section
-    class="px-page pt-[56px] pb-0 relative"
+<!-- ── § Masthead + Bio (shared mountain texture) ─────────── -->
+<div
+    class="relative"
     style="background-image: url('/assets/img/mountain.jpg'); background-size: cover; background-position: center 40%;"
 >
-    <!-- Wash the photo down to a barely-there texture -->
-    <div class="absolute inset-0 pointer-events-none" style="background: rgba(232,230,227,0.94);"></div>
-    <div class="relative z-10">
-    <p class="kicker mb-[14px]">— About · Updated 2026·04</p>
-    <h1
-        class="font-display font-normal leading-[0.95] tracking-tight text-ink max-w-[1000px]"
-        style="font-size: clamp(56px, 8.6vw, 104px); letter-spacing: clamp(-1.4px, -0.18vw, -2.4px);"
-    >
-        Designer, <em>researcher,</em><br />
-        and <em class="text-teal">quiet tool-builder.</em>
-    </h1>
-    </div>
-</section>
+    <!-- Theme-aware overlay: washes photo to a barely-there texture -->
+    <div class="absolute inset-0 pointer-events-none" style="background: var(--color-masthead-overlay);"></div>
 
-<!-- ── § Bio + Portrait ───────────────────────────────────── -->
-<section class="px-page pt-[40px] pb-[36px]">
+    <!-- Masthead -->
+    <section class="px-page pt-[56px] pb-0 relative z-10">
+        <p class="kicker mb-[14px]">— About · Updated 2026·04</p>
+        <h1
+            class="font-display font-normal leading-[0.95] tracking-tight text-ink max-w-[1000px]"
+            style="font-size: clamp(56px, 8.6vw, 104px); letter-spacing: clamp(-1.4px, -0.18vw, -2.4px);"
+        >
+            Researcher, <em>ponderer,</em><br />
+            and <em class="text-teal">solution-builder.</em>
+        </h1>
+    </section>
+
+    <!-- Bio + Portrait -->
+    <section class="px-page pt-[40px] pb-[36px] relative z-10">
     <div
         class="grid gap-[56px]"
         style="grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);"
@@ -70,7 +71,7 @@ const { recentProjects = [] } = Astro.props;
                     Fig. 1 — Y.C.
                 </span>
                 <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60">
-                    2025
+                    Grandfather Mountain, NC
                 </span>
             </div>
         </div>
@@ -130,7 +131,8 @@ const { recentProjects = [] } = Astro.props;
             </div>
         </div>
     </div>
-</section>
+    </section>
+</div><!-- end mountain texture wrapper -->
 
 <!-- ── § Recent Work ──────────────────────────────────────── -->
 {recentProjects.length > 0 && (

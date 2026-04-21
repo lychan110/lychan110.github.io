@@ -18,7 +18,8 @@
     --color-muted:       #6B6762;
     --color-rule:        rgba(30, 30, 28, 0.14);
     --color-rule-strong: rgba(30, 30, 28, 0.28);
-    --color-nav-bg:      rgba(232, 230, 227, 0.92);
+    --color-nav-bg:          rgba(232, 230, 227, 0.92);
+    --color-masthead-overlay: rgba(232, 230, 227, 0.94);
     --pad: 72px;
 }
 
@@ -35,7 +36,8 @@ html.dark {
     --color-muted:       #8A867F;
     --color-rule:        rgba(232, 230, 227, 0.12);
     --color-rule-strong: rgba(232, 230, 227, 0.26);
-    --color-nav-bg:      rgba(20, 20, 22, 0.92);
+    --color-nav-bg:          rgba(20, 20, 22, 0.92);
+    --color-masthead-overlay: rgba(20, 20, 22, 0.94);
 }
 
 /* --- Base -------------------------------------------------- */
