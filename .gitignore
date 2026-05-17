@@ -8,7 +8,9 @@ dist/
 .claude/worktrees
 .claude/ip-keywords.txt
 .claude/launch.json
+.claude/settings.json
 .remember/
 .superpowers/
 portfolio-scaffold/
 design_handoff_portfolio/
+.logs/
