@@ -182,11 +182,11 @@ const STATUS_SYMBOL: Record<string, string> = {
                     <div
                         aria-hidden="true"
                         class="w-full relative overflow-hidden"
-                        style="height: 200px; background: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.16); border: 1px solid var(--color-rule);"
+                        style={`height: 200px; background: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / var(--swatch-alpha)); border: 1px solid var(--color-rule);`}
                     >
                         <span
                             class="font-display italic absolute inset-0 flex items-center justify-center"
-                            style="font-size: 96px; line-height: 1; color: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.75);"
+                            style={`font-size: 96px; line-height: 1; color: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.75);`}
                         >
                             {p.title.charAt(0)}
                         </span>
@@ -358,7 +358,8 @@ const STATUS_SYMBOL: Record<string, string> = {
     // Fades out as the section scrolls up past the top; fades in when scrolling back down.
     const portraitWrap = document.getElementById('portrait-wrap');
     const bioEl = document.getElementById('bio-reveal');
-    if (portraitWrap && bioEl) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (portraitWrap && bioEl && !reduceMotion) {
         function updateBioFade() {
             const rect = portraitWrap!.getBoundingClientRect();
             // Fade over a distance equal to 60% of the viewport height above the fold.

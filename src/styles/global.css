@@ -21,6 +21,7 @@
     --color-nav-bg:          rgba(237, 229, 214, 0.92);
     --color-masthead-overlay: rgba(237, 229, 214, 0.94);
     --pad: 72px;
+    --swatch-alpha: 0.16;
 
     /* RGB channels for Tailwind opacity utilities (text-ink/88 etc).
        Must stay in sync with --color-* hex values above. */
@@ -69,6 +70,7 @@ html.dark {
     --c-ochre:      216 189 130;
     --c-sage:       181 207 175;
     --c-rust:       217 127 92;
+    --swatch-alpha: 0.24;
 }
 
 /* --- Base -------------------------------------------------- */
@@ -96,6 +98,16 @@ html.dark {
     ::-webkit-scrollbar-track  { background: var(--color-paper-deep); }
     ::-webkit-scrollbar-thumb  { background: var(--color-muted); }
     ::-webkit-scrollbar-thumb:hover { background: var(--color-teal); }
+
+    /* Respect reduced-motion preferences (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
 }
 
 /* --- Components -------------------------------------------- */

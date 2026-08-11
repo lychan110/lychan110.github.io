@@ -56,6 +56,15 @@ const { current } = Astro.props;
 
     syncIcon();
 
+    // Hash-aware active state: highlight Pubs when landing on /#publications
+    const pubsLink = document.querySelector('a[href="/#publications"]') as HTMLAnchorElement | null;
+    const syncHash = () => {
+        if (!pubsLink) return;
+        pubsLink.classList.toggle('active', window.location.hash === '#publications');
+    };
+    syncHash();
+    window.addEventListener('hashchange', syncHash);
+
     btn.addEventListener('click', () => {
         const isDark = html.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');

@@ -107,7 +107,7 @@ export default function ProjectGrid({ projects }: Props) {
                     className="font-mono text-center py-16 opacity-50"
                     style={{ fontSize: 12, letterSpacing: '0.1em' }}
                 >
-                    No projects match this filter.
+                    No records in this drawer — try another category.
                 </p>
             ) : (
                 filtered.map((p, i) => (
@@ -158,7 +158,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     style={{
                         width: 64, height: 64,
                         border: '1px solid var(--color-rule)',
-                        background: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / 0.16)`,
+                        background: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / var(--swatch-alpha))`,
                         flexShrink: 0,
                     }}
                 >
