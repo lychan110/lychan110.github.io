@@ -7,21 +7,21 @@
 
 /* --- Design tokens: light (default) ----------------------- */
 :root {
-    --color-ink:         #1E1A14;
-    --color-ink-soft:    #3A3632;
-    --color-paper:       #EDE5D6;
-    --color-paper-deep:  #E2D8C4;
-    --color-paper-soft:  #F5EEDF;
+    --color-ink:         #1C1C1E;
+    --color-ink-soft:    #38363A;
+    --color-paper:       #E8E6E1;
+    --color-paper-deep:  #DEDCD7;
+    --color-paper-soft:  #F0EEEA;
     --color-teal:        #1289AC;
     --color-teal-pale:   #8CC1DB;
     --color-teal-deep:   #1F6B80;
-    --color-muted:       #5E5953;
-    --color-interactive: #8F3F24;
-    --color-rule:        rgba(30, 26, 20, 0.16);
-    --color-rule-strong: rgba(30, 26, 20, 0.28);
-    --link:          var(--color-interactive);
+    --color-muted:       #5C5A58;
+    --color-interactive: #9A2438;
+    --color-rule:        rgba(28, 28, 30, 0.16);
+    --color-rule-strong: rgba(28, 28, 30, 0.28);
+    --link:          var(--color-teal-deep);
     --color-nav-bg:          rgba(237, 229, 214, 0.92);
-    --color-masthead-overlay: rgba(237, 229, 214, 0.88);
+    --color-masthead-overlay: rgba(232, 230, 225, 0.88);
     --pad: 72px;
     --swatch-alpha: 0.20;
 
@@ -36,7 +36,7 @@
     --c-teal-pale:  140 193 219;
     --c-teal-deep:  31 107 128;
     --c-muted:      94 89 83;
-    --c-interactive: 143 63 36;
+    --c-interactive: 154 36 56;
     --c-coral:      216 138 115;
     --c-ochre:      201 169 97;
     --c-sage:       159 183 155;
@@ -54,10 +54,10 @@ html.dark {
     --color-teal-pale:   #A9D7E6;
     --color-teal-deep:   #3E9BB5;
     --color-muted:       #8A867F;
-    --color-interactive: #E28A5C;
+    --color-interactive: #E0637C;
     --color-rule:        rgba(232, 230, 227, 0.12);
     --color-rule-strong: rgba(232, 230, 227, 0.26);
-    --link:          var(--color-interactive);
+    --link:          var(--color-teal);
     --color-nav-bg:          rgba(20, 20, 22, 0.92);
     --color-masthead-overlay: rgba(20, 20, 22, 0.88);
 
@@ -71,7 +71,7 @@ html.dark {
     --c-teal-pale:  169 215 230;
     --c-teal-deep:  62 155 181;
     --c-muted:      138 134 127;
-    --c-interactive: 226 138 92;
+    --c-interactive: 224 99 124;
     --c-coral:      228 164 147;
     --c-ochre:      216 189 130;
     --c-sage:       181 207 175;
@@ -198,7 +198,7 @@ html.dark {
         background: var(--color-paper-soft);
     }
     .ledger-row-link:hover .row-title {
-        color: var(--color-teal);
+        color: var(--color-interactive);
     }
 
     .row-title { transition: color 150ms; }
