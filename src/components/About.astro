@@ -83,10 +83,10 @@ const STATUS_SYMBOL: Record<string, string> = {
             </div>
             <!-- Caption -->
             <div class="flex flex-col gap-[2px] md:flex-row md:justify-between mt-2 overflow-hidden" aria-hidden="true">
-                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60 truncate">
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-70 truncate">
                     Fig. 1 — Y.C.
                 </span>
-                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60 truncate">
+                <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-70 truncate">
                     @ Grandfather Mtn.
                 </span>
             </div>
@@ -113,7 +113,7 @@ const STATUS_SYMBOL: Record<string, string> = {
             <!-- Contact links -->
             <div class="flex flex-wrap gap-x-7 gap-y-3 mt-[8px]">
                 <span class="font-mono text-[11px] tracking-[0.05em]">
-                    <span class="opacity-55 mr-2">Email</span>
+                    <span class="opacity-70 mr-2">Email</span>
                     <a
                         id="contact-email"
                         href="mailto:lychan115&#64;gmail.com"
@@ -124,7 +124,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                     >lychan115&#64;gmail.com</a>
                 </span>
                 <span class="font-mono text-[11px] tracking-[0.05em]">
-                    <span class="opacity-55 mr-2">GitHub</span>
+                    <span class="opacity-70 mr-2">GitHub</span>
                     <a
                         href="https://github.com/lychan110"
                         target="_blank" rel="noopener"
@@ -135,7 +135,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                     </a>
                 </span>
                 <span class="font-mono text-[11px] tracking-[0.05em]">
-                    <span class="opacity-55 mr-2">Scholar</span>
+                    <span class="opacity-70 mr-2">Scholar</span>
                     <a
                         href="https://scholar.google.com/citations?user=ZK2gpWYAAAAJ"
                         target="_blank" rel="noopener"
@@ -189,7 +189,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                     >
                         <span
                             class="font-display italic absolute inset-0 flex items-center justify-center"
-                            style={`font-size: 96px; line-height: 1; color: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.75);`}
+                            style={`font-size: 96px; line-height: 1; color: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 1);`}
                         >
                             {p.title.charAt(0)}
                         </span>
@@ -256,7 +256,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                         {role}
                     </span>
                     {[company, dates].filter(Boolean).length > 0 && (
-                        <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+                        <span class="font-mono text-[10px] tracking-[0.1em] opacity-70 mt-[4px] block">
                             {[company, dates].filter(Boolean).join(' · ')}
                         </span>
                     )}
@@ -284,7 +284,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                 >
                     {e.degree}
                 </span>
-                <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+                <span class="font-mono text-[10px] tracking-[0.1em] opacity-70 mt-[4px] block">
                     {[e.school, e.years].filter(Boolean).join(' · ')}
                 </span>
             </div>
@@ -346,7 +346,7 @@ const STATUS_SYMBOL: Record<string, string> = {
                             style="font-size: 18px; letter-spacing: -0.2px;"
                         >{t.title}</span>
                         {t.venue && (
-                            <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+                            <span class="font-mono text-[10px] tracking-[0.1em] opacity-70 mt-[4px] block">
                                 {t.venue}{t.location ? ` · ${t.location}` : ''}
                             </span>
                         )}

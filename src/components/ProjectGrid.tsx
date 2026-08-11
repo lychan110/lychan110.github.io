@@ -30,8 +30,8 @@ const HEADERS = [
 
 const STATUS_SYMBOL: Record<string, { symbol: string; color: string }> = {
     complete: { symbol: '●', color: 'var(--color-ink)' },
-    ongoing:  { symbol: '◐', color: '#2E8CA6' },
-    archived: { symbol: '○', color: '#6B6762' },
+    ongoing:  { symbol: '◐', color: 'var(--color-teal)' },
+    archived: { symbol: '○', color: 'var(--color-muted)' },
 };
 
 // Category-keyed accent tint for swatches (theme-aware via RGB-channel tokens).
@@ -61,7 +61,7 @@ export default function ProjectGrid({ projects }: Props) {
                 style={{ borderTop: '1px solid var(--color-ink)', borderBottom: '1px solid var(--color-rule)' }}
             >
                 <span
-                    className="font-mono mr-[6px] opacity-55"
+                    className="font-mono mr-[6px] opacity-70"
                     style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase' }}
                 >
                     Category →
@@ -76,7 +76,7 @@ export default function ProjectGrid({ projects }: Props) {
                     </button>
                 ))}
                 <span
-                    className="ml-auto font-mono opacity-55"
+                    className="ml-auto font-mono opacity-70"
                     style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase' }}
                 >
                     {pad3(filtered.length)} records
@@ -91,7 +91,7 @@ export default function ProjectGrid({ projects }: Props) {
                 {HEADERS.map(({ label, mobile }) => (
                     <span
                         key={label || 'thumb'}
-                        className={`font-mono opacity-50${label === 'META' ? ' text-right' : ''}${mobile ? '' : ' hidden md:block'}`}
+                        className={`font-mono opacity-65${label === 'META' ? ' text-right' : ''}${mobile ? '' : ' hidden md:block'}`}
                         style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                     >
                         {label === 'META' ? (
@@ -109,7 +109,7 @@ export default function ProjectGrid({ projects }: Props) {
             {/* ── Rows ── */}
             {filtered.length === 0 ? (
                 <p
-                    className="font-mono text-center py-16 opacity-50"
+                    className="font-mono text-center py-16 opacity-65"
                     style={{ fontSize: 12, letterSpacing: '0.1em' }}
                 >
                     No records in this drawer — try another category.
@@ -151,7 +151,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
             >
                 {/* № */}
                 <span
-                    className="font-mono opacity-50 pt-[6px]"
+                    className="font-mono opacity-65 pt-[6px]"
                     style={{ fontSize: 10, letterSpacing: '0.1em' }}
                 >
                     {String(index + 1).padStart(3, '0')}
@@ -172,7 +172,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     ) : (
                         <span
                             className="font-display italic"
-                            style={{ fontSize: 30, color: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / 0.8)` }}
+                            style={{ fontSize: 30, color: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / 1)` }}
                         >
                             {p.title.charAt(0)}
                         </span>
@@ -196,7 +196,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     {/* Tags — inline mono line (replaces the standalone column) */}
                     {p.tags.length > 0 && (
                         <div
-                            className="font-mono opacity-60 mt-[8px]"
+                            className="font-mono opacity-70 mt-[8px]"
                             style={{ fontSize: 10, lineHeight: 1.6, letterSpacing: '0.05em' }}
                         >
                             {p.tags.map(t => (

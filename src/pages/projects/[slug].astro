@@ -29,7 +29,7 @@ const links = [
 ].filter(Boolean) as { label: string; href: string }[];
 
 const statusSymbol = { complete: '●', ongoing: '◐', archived: '○' }[project.data.status] ?? '●';
-const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B6762' }[project.data.status];
+const statusColor  = { complete: 'var(--color-ink)', ongoing: 'var(--color-teal)', archived: 'var(--color-muted)' }[project.data.status];
 ---
 
 <Base
@@ -84,7 +84,7 @@ const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B67
                     { label: 'TAGS',     value: project.data.tags.join(' · ') },
                 ].map(({ label, value }) => (
                     <div class="meta-cell">
-                        <p class="font-mono m-0 mb-[5px] opacity-55" style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;">
+                        <p class="font-mono m-0 mb-[5px] opacity-70" style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;">
                             {label}
                         </p>
                         {label === 'STATUS' ? (
@@ -121,7 +121,7 @@ const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B67
                         prose-headings:font-display prose-headings:font-normal
                         prose-headings:tracking-tight prose-headings:text-ink
                         prose-p:font-body prose-p:text-[17px] prose-p:leading-[1.7]
-                        prose-a:text-teal prose-a:no-underline hover:prose-a:underline
+                        prose-a:text-[var(--link)]
                         prose-a:underline-offset-[3px]
                         prose-blockquote:font-display prose-blockquote:italic
                         prose-blockquote:text-[28px] prose-blockquote:leading-[1.35]
@@ -149,7 +149,7 @@ const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B67
                             >
                                 {prev.data.title}
                             </p>
-                            <p class="font-mono m-0 opacity-60" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
+                            <p class="font-mono m-0 opacity-70" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
                                 {prev.data.date.slice(0,4)} · {prev.data.category}
                             </p>
                         </a>
@@ -166,7 +166,7 @@ const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B67
                             >
                                 {next.data.title}
                             </p>
-                            <p class="font-mono m-0 opacity-60" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
+                            <p class="font-mono m-0 opacity-70" style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">
                                 {next.data.date.slice(0,4)} · {next.data.category}
                             </p>
                         </a>

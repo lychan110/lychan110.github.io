@@ -35,7 +35,7 @@ const { pub } = Astro.props;
                 {pub.title}
             </span>
         )}
-        <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+        <span class="font-mono text-[10px] tracking-[0.1em] opacity-70 mt-[4px] block">
             {[pub.authors, pub.type === 'phdthesis' ? 'Ph.D. dissertation' : pub.venue].filter(Boolean).join(' · ')}
         </span>
     </div>
