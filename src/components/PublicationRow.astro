@@ -5,43 +5,38 @@ interface Props {
 const { pub } = Astro.props;
 ---
 
-<div class="ledger-row" style="grid-template-columns: 56px 1fr 1fr;">
+<div class="ledger-row" style="grid-template-columns: 56px 1fr;">
     <!-- Year -->
     <span
-        class={`font-mono text-[12px] tracking-[0.1em] ${String(pub.year) === '2026' ? 'text-teal' : ''}`}
+        class={`font-mono text-[12px] tracking-[0.1em] ${String(pub.year) === '2026' ? 'text-teal' : 'opacity-70'}`}
         style="font-variant-numeric: tabular-nums;"
     >
         {pub.year}
     </span>
 
-    <!-- Title + authors -->
+    <!-- Title + meta -->
     <div>
         {(pub.url || pub.doi) ? (
             <a
                 href={pub.url || `https://doi.org/${pub.doi}`}
                 target="_blank"
                 rel="noopener"
-                class="font-display font-medium block leading-[1.15]
+                class="font-display font-medium block leading-[1]
                        text-ink hover:text-teal transition-colors no-underline"
-                style="font-size: 22px; letter-spacing: -0.2px;"
+                style="font-size: 18px; letter-spacing: -0.2px;"
             >
                 {pub.title} <span class="font-mono text-[9px] opacity-50 align-top">↗</span>
             </a>
         ) : (
             <span
-                class="font-display font-medium block leading-[1.15]"
-                style="font-size: 22px; letter-spacing: -0.2px;"
+                class="font-display font-medium block leading-[1]"
+                style="font-size: 18px; letter-spacing: -0.2px;"
             >
                 {pub.title}
             </span>
         )}
-        <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[6px] block">
-            {pub.authors}
+        <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[4px] block">
+            {[pub.authors, pub.type === 'phdthesis' ? 'Ph.D. dissertation' : pub.venue].filter(Boolean).join(' · ')}
         </span>
     </div>
-
-    <!-- Venue -->
-    <span class="font-body text-[14px] italic opacity-80 self-start pt-[3px]">
-        {pub.type === 'phdthesis' ? 'Ph.D. dissertation' : pub.venue}
-    </span>
 </div>
