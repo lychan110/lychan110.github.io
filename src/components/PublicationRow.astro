@@ -3,12 +3,13 @@ interface Props {
     pub: any;
 }
 const { pub } = Astro.props;
+const TYPE_TINT: Record<string, string> = { phdthesis: '--c-ochre', article: '--c-teal', inproceedings: '--c-coral' };
 ---
 
 <div class="ledger-row" style="grid-template-columns: 56px 1fr;">
     <!-- Year -->
     <span
-        class={`font-mono text-[12px] tracking-[0.1em] ${String(pub.year) === '2026' ? 'text-teal' : 'opacity-70'}`}
+        class={`font-mono text-[12px] tracking-[0.1em] ${String(pub.year) === '2026' ? 'text-tealDeep' : 'opacity-70'}`}
         style="font-variant-numeric: tabular-nums;"
     >
         {pub.year}
@@ -21,16 +22,16 @@ const { pub } = Astro.props;
                 href={pub.url || `https://doi.org/${pub.doi}`}
                 target="_blank"
                 rel="noopener"
-                class="font-display font-medium block leading-[1]
-                       text-ink hover:text-teal transition-colors no-underline"
-                style="font-size: 18px; letter-spacing: -0.2px;"
+                class="font-display font-medium block leading-[1] pub-row-marker
+                       text-ink hover:text-interactive transition-colors no-underline"
+                style={`font-size: 18px; letter-spacing: -0.2px; --marker: rgb(var(${TYPE_TINT[pub.type] ?? '--c-teal'}) / 0.35);`}
             >
                 {pub.title} <span class="font-mono text-[9px] opacity-50 align-top">↗</span>
             </a>
         ) : (
             <span
-                class="font-display font-medium block leading-[1]"
-                style="font-size: 18px; letter-spacing: -0.2px;"
+                class="font-display font-medium block leading-[1] pub-row-marker"
+                style={`font-size: 18px; letter-spacing: -0.2px; --marker: rgb(var(${TYPE_TINT[pub.type] ?? '--c-teal'}) / 0.35);`}
             >
                 {pub.title}
             </span>

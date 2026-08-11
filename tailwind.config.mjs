@@ -18,6 +18,7 @@ export default {
                 sage:       'rgb(var(--c-sage) / <alpha-value>)',
                 rust:       'rgb(var(--c-rust) / <alpha-value>)',
                 muted:      'rgb(var(--c-muted) / <alpha-value>)',
+                interactive: 'rgb(var(--c-interactive) / <alpha-value>)',
             },
             fontFamily: {
                 display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

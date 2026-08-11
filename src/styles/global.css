@@ -12,13 +12,14 @@
     --color-paper:       #EDE5D6;
     --color-paper-deep:  #E2D8C4;
     --color-paper-soft:  #F5EEDF;
-    --color-teal:        #2E8CA6;
+    --color-teal:        #1289AC;
     --color-teal-pale:   #8CC1DB;
     --color-teal-deep:   #1F6B80;
     --color-muted:       #5E5953;
+    --color-interactive: #8F3F24;
     --color-rule:        rgba(30, 26, 20, 0.16);
     --color-rule-strong: rgba(30, 26, 20, 0.28);
-    --link:          var(--color-teal-deep);
+    --link:          var(--color-interactive);
     --color-nav-bg:          rgba(237, 229, 214, 0.92);
     --color-masthead-overlay: rgba(237, 229, 214, 0.88);
     --pad: 72px;
@@ -31,10 +32,11 @@
     --c-paper:      237 229 214;
     --c-paper-deep: 226 216 196;
     --c-paper-soft: 245 238 223;
-    --c-teal:       46 140 166;
+    --c-teal:       18 137 172;
     --c-teal-pale:  140 193 219;
     --c-teal-deep:  31 107 128;
     --c-muted:      94 89 83;
+    --c-interactive: 143 63 36;
     --c-coral:      216 138 115;
     --c-ochre:      201 169 97;
     --c-sage:       159 183 155;
@@ -52,9 +54,10 @@ html.dark {
     --color-teal-pale:   #A9D7E6;
     --color-teal-deep:   #3E9BB5;
     --color-muted:       #8A867F;
+    --color-interactive: #E28A5C;
     --color-rule:        rgba(232, 230, 227, 0.12);
     --color-rule-strong: rgba(232, 230, 227, 0.26);
-    --link:          var(--color-teal);
+    --link:          var(--color-interactive);
     --color-nav-bg:          rgba(20, 20, 22, 0.92);
     --color-masthead-overlay: rgba(20, 20, 22, 0.88);
 
@@ -68,6 +71,7 @@ html.dark {
     --c-teal-pale:  169 215 230;
     --c-teal-deep:  62 155 181;
     --c-muted:      138 134 127;
+    --c-interactive: 226 138 92;
     --c-coral:      228 164 147;
     --c-ochre:      216 189 130;
     --c-sage:       181 207 175;
@@ -210,7 +214,7 @@ html.dark {
         cursor: pointer;
     }
     .card-hover:hover { transform: translateY(-3px); }
-    .card-hover:hover .card-title { color: var(--color-teal); }
+    .card-hover:hover .card-title { color: var(--color-interactive); }
     .card-title { transition: color 200ms; }
 
     /* Projects ledger — responsive column grid */
@@ -247,8 +251,30 @@ html.dark {
         transition: color 150ms, text-decoration-color 150ms;
     }
     .prose-editorial :where(a):hover {
-        color: var(--color-teal);
-        text-decoration-color: var(--color-teal);
+        color: var(--color-interactive);
+        text-decoration-color: var(--color-interactive);
+    }
+
+    /* Publications ledger: quiet type-keyed tint marker before the title (catalog DNA). */
+    .pub-row-marker::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 12px;
+        vertical-align: baseline;
+        background: var(--marker, rgba(30, 26, 20, 0.12));
+    }
+
+    /* Publications ledger: quiet type-keyed tint marker before the title (catalog DNA). */
+    .pub-row-marker::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 12px;
+        vertical-align: baseline;
+        background: var(--marker, rgba(30, 26, 20, 0.12));
     }
 
     /* Resource pill (Paper / Repo / Demo) — mirrors .pill grammar */
