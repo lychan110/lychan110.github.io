@@ -2,6 +2,7 @@
 // About — all sections of the landing page live here.
 // recentProjects is passed from index.astro (3 most-recent entries).
 import { bio, education, awards, experience, talks } from '../data/about';
+import AwardRow from './AwardRow.astro';
 
 interface RecentProject {
     slug: string;
@@ -17,6 +18,18 @@ interface Props {
 }
 
 const { recentProjects = [] } = Astro.props;
+
+// Category-keyed accent tint for project swatches (theme-aware via RGB-channel tokens).
+const CATEGORY_TINT: Record<string, string> = {
+    work:     '--c-ochre',
+    academic: '--c-teal',
+    personal: '--c-sage',
+};
+const STATUS_SYMBOL: Record<string, string> = {
+    complete: '●',
+    ongoing:  '◐',
+    archived: '○',
+};
 ---
 
 <!-- ── § Masthead + Bio (shared mountain texture) ─────────── -->
@@ -48,7 +61,7 @@ const { recentProjects = [] } = Astro.props;
                md:[grid-template-columns:minmax(220px,300px)_minmax(0,1fr)]"
     >
         <!-- Portrait -->
-        <div class="w-[160px] md:w-full">
+        <div class="w-[160px] md:w-full" role="group" aria-label="Portrait of Yu-Chin Chan, Grandfather Mountain">
             <div
                 class="relative overflow-hidden"
                 style="aspect-ratio: 4/5; box-shadow: 0 1px 0 var(--color-ink), 0 18px 40px -24px rgba(0,0,0,0.35);"
@@ -61,6 +74,7 @@ const { recentProjects = [] } = Astro.props;
                 />
                 <!-- Registration mark -->
                 <span
+                    aria-hidden="true"
                     class="absolute top-[8px] left-[8px] font-mono text-[9px]
                            tracking-[0.15em] text-white/75 pointer-events-none"
                 >
@@ -68,7 +82,7 @@ const { recentProjects = [] } = Astro.props;
                 </span>
             </div>
             <!-- Caption -->
-            <div class="flex flex-col gap-[2px] md:flex-row md:justify-between mt-2 overflow-hidden">
+            <div class="flex flex-col gap-[2px] md:flex-row md:justify-between mt-2 overflow-hidden" aria-hidden="true">
                 <span class="font-mono text-[10px] tracking-[0.12em] uppercase opacity-60 truncate">
                     Fig. 1 — Y.C.
                 </span>
@@ -102,12 +116,12 @@ const { recentProjects = [] } = Astro.props;
                     <span class="opacity-55 mr-2">Email</span>
                     <a
                         id="contact-email"
-                        href="#"
+                        href="mailto:lychan115&#64;gmail.com"
                         data-u="lychan115"
                         data-d="gmail.com"
                         class="border-b border-teal pb-[2px] text-ink hover:text-teal
                                transition-colors no-underline"
-                    ></a>
+                    >lychan115&#64;gmail.com</a>
                 </span>
                 <span class="font-mono text-[11px] tracking-[0.05em]">
                     <span class="opacity-55 mr-2">GitHub</span>
@@ -117,7 +131,7 @@ const { recentProjects = [] } = Astro.props;
                         class="border-b border-teal pb-[2px] text-ink hover:text-teal
                                transition-colors no-underline"
                     >
-                        lychan110
+                        lychan110 <span class="font-mono text-[9px] opacity-60 align-top" aria-hidden="true">↗</span>
                     </a>
                 </span>
                 <span class="font-mono text-[11px] tracking-[0.05em]">
@@ -128,7 +142,7 @@ const { recentProjects = [] } = Astro.props;
                         class="border-b border-teal pb-[2px] text-ink hover:text-teal
                                transition-colors no-underline"
                     >
-                        Yu-Chin Chan
+                        Yu-Chin Chan <span class="font-mono text-[9px] opacity-60 align-top" aria-hidden="true">↗</span>
                     </a>
                 </span>
             </div>
@@ -164,13 +178,23 @@ const { recentProjects = [] } = Astro.props;
                     href={`/projects/${p.slug}`}
                     class="card-hover block no-underline text-ink"
                 >
-                    <!-- Placeholder swatch -->
+                    <!-- Category-keyed catalog plate (decorative) -->
                     <div
-                        class="w-full bg-paperDeep border border-rule"
-                        style="height: 200px; display: flex; align-items: center; justify-content: center;"
+                        aria-hidden="true"
+                        class="w-full relative overflow-hidden"
+                        style="height: 200px; background: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.16); border: 1px solid var(--color-rule);"
                     >
-                        <span class="font-mono text-[9px] tracking-widest uppercase opacity-30">
-                            {p.slug}
+                        <span
+                            class="font-display italic absolute inset-0 flex items-center justify-center"
+                            style="font-size: 96px; line-height: 1; color: rgb(var(${CATEGORY_TINT[p.category] ?? '--c-teal'}) / 0.75);"
+                        >
+                            {p.title.charAt(0)}
+                        </span>
+                        <span
+                            class="absolute top-[8px] right-[8px] font-mono text-[10px]"
+                            style="color: var(--color-ink);"
+                        >
+                            {STATUS_SYMBOL[p.status] ?? '●'}
                         </span>
                     </div>
                     <div class="mt-[14px]">
@@ -274,19 +298,15 @@ const { recentProjects = [] } = Astro.props;
                 </h2>
                 <span class="kicker">§ 03</span>
             </div>
-            {awards.map((a, i) => (
-                <div
-                    class="ledger-row"
-                    style="grid-template-columns: 56px 1fr;"
-                >
-                    <span class="font-mono text-[11px] opacity-70"
-                          style="font-variant-numeric: tabular-nums;">{a.year}</span>
-                    <span
-                        class="font-display font-medium"
-                        style="font-size: 18px;"
-                    >{a.title}</span>
-                </div>
-            ))}
+            {awards.slice(0, 2).map(a => <AwardRow a={a} />)}
+            {awards.length > 2 && (
+                <details class="ledger-more">
+                    <summary>View all {awards.length} honors</summary>
+                    <div class="pt-[6px]">
+                        {awards.slice(2).map(a => <AwardRow a={a} />)}
+                    </div>
+                </details>
+            )}
         </div>
 
         <!-- Talks -->

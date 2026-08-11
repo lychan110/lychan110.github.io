@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="404 — Yu-Chin Chan">
+    <Nav current="about" />
+    <main class="px-page">
+        <section class="pt-[56px] pb-[64px] max-w-[1100px]">
+            <p class="kicker mb-[14px]">— Error 404 · Off the catalog</p>
+            <h1
+                class="font-display font-normal leading-[0.95] m-0"
+                style="font-size: clamp(56px, 8vw, 96px); letter-spacing: -1.8px;"
+            >
+                Lost in the <em>stacks.</em>
+            </h1>
+            <p class="font-body text-[16px] leading-[1.65] text-ink/82 max-w-[560px] mt-[28px] mb-0">
+                The page you're after was moved, renamed, or never cataloged. Try the index.
+            </p>
+            <div class="flex flex-wrap gap-x-7 gap-y-3 mt-[32px]">
+                <a
+                    href="/"
+                    class="font-mono text-[11px] tracking-[0.05em] border-b border-teal pb-[2px]
+                           text-ink hover:text-teal transition-colors no-underline"
+                >
+                    ← Back to the index
+                </a>
+                <a
+                    href="/projects"
+                    class="font-mono text-[11px] tracking-[0.05em] border-b border-teal pb-[2px]
+                           text-ink hover:text-teal transition-colors no-underline"
+                >
+                    Browse projects →
+                </a>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Base>

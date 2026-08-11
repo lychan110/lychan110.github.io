@@ -1,6 +1,7 @@
 ---
 // Publications ledger — reads from public/data/publications.json generated at build.
 // Designed to be rendered in a <slot name="publications"> inside About.astro.
+import PublicationRow from './PublicationRow.astro';
 let pubs: any[] = [];
 try {
     const raw = await import('../../public/data/publications.json');
@@ -27,51 +28,15 @@ try {
         </p>
     ) : (
         <div>
-            {pubs.map((pub: any, i: number) => (
-                <div
-                    class="ledger-row"
-                    style="grid-template-columns: 56px 1fr 1fr;"
-                >
-                    <!-- Year -->
-                    <span
-                        class={`font-mono text-[12px] tracking-[0.1em] ${String(pub.year) === '2026' ? 'text-teal' : ''}`}
-                        style="font-variant-numeric: tabular-nums;"
-                    >
-                        {pub.year}
-                    </span>
-
-                    <!-- Title + authors -->
-                    <div>
-                        {(pub.url || pub.doi) ? (
-                            <a
-                                href={pub.url || `https://doi.org/${pub.doi}`}
-                                target="_blank"
-                                rel="noopener"
-                                class="font-display font-medium block leading-[1.15]
-                                       text-ink hover:text-teal transition-colors no-underline"
-                                style="font-size: 22px; letter-spacing: -0.2px;"
-                            >
-                                {pub.title}
-                            </a>
-                        ) : (
-                            <span
-                                class="font-display font-medium block leading-[1.15]"
-                                style="font-size: 22px; letter-spacing: -0.2px;"
-                            >
-                                {pub.title}
-                            </span>
-                        )}
-                        <span class="font-mono text-[10px] tracking-[0.1em] opacity-60 mt-[6px] block">
-                            {pub.authors}
-                        </span>
+            {pubs.slice(0, 2).map((pub: any) => <PublicationRow pub={pub} />)}
+            {pubs.length > 2 && (
+                <details class="ledger-more">
+                    <summary>View all {pubs.length} publications</summary>
+                    <div class="pt-[6px]">
+                        {pubs.slice(2).map((pub: any) => <PublicationRow pub={pub} />)}
                     </div>
-
-                    <!-- Venue -->
-                    <span class="font-body text-[14px] italic opacity-80 self-start pt-[3px]">
-                        {pub.venue}
-                    </span>
-                </div>
-            ))}
+                </details>
+            )}
         </div>
     )}
 </section>

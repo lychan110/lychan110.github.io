@@ -31,9 +31,16 @@ const HEADERS = [
 ] as const;
 
 const STATUS_SYMBOL: Record<string, { symbol: string; color: string }> = {
-    complete: { symbol: '●', color: '#1E1E1C' },
+    complete: { symbol: '●', color: 'var(--color-ink)' },
     ongoing:  { symbol: '◐', color: '#2E8CA6' },
     archived: { symbol: '○', color: '#6B6762' },
+};
+
+// Category-keyed accent tint for swatches (theme-aware via RGB-channel tokens).
+const TINT: Record<string, string> = {
+    work:     '--c-ochre',
+    academic: '--c-teal',
+    personal: '--c-sage',
 };
 
 function pad3(n: number) {
@@ -53,7 +60,7 @@ export default function ProjectGrid({ projects }: Props) {
             {/* ── Filter bar ── */}
             <div
                 className="flex items-center gap-2 py-[20px] border-b"
-                style={{ borderTop: '1px solid #1E1E1C', borderBottom: '1px solid rgba(30,30,28,0.14)' }}
+                style={{ borderTop: '1px solid var(--color-ink)', borderBottom: '1px solid var(--color-rule)' }}
             >
                 <span
                     className="font-mono mr-[6px] opacity-55"
@@ -81,7 +88,7 @@ export default function ProjectGrid({ projects }: Props) {
             {/* ── Column headers ── */}
             <div
                 className="project-ledger-row items-end"
-                style={{ padding: '0 12px 10px 12px', borderBottom: '1px solid rgba(30,30,28,0.14)' }}
+                style={{ padding: '0 12px 10px 12px', borderBottom: '1px solid var(--color-rule)' }}
             >
                 {HEADERS.map(({ label, mobile }) => (
                     <span
@@ -121,13 +128,21 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
     ].filter(Boolean) as { label: string; href: string }[];
 
     return (
-        <a
-            href={`/projects/${p.slug}`}
+        <div
+            role="link"
+            tabIndex={0}
+            onClick={() => { window.location.href = `/projects/${p.slug}`; }}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    window.location.href = `/projects/${p.slug}`;
+                }
+            }}
             className="ledger-row-link block no-underline text-ink"
         >
             <div
                 className="project-ledger-row items-start"
-                style={{ padding: '22px 12px', borderBottom: '1px solid rgba(30,30,28,0.14)' }}
+                style={{ padding: '22px 12px', borderBottom: '1px solid var(--color-rule)' }}
             >
                 {/* № */}
                 <span
@@ -139,11 +154,11 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
 
                 {/* Thumbnail — hidden on mobile */}
                 <div
-                    className="hidden md:flex items-center justify-center"
+                    className="hidden md:flex items-center justify-center overflow-hidden"
                     style={{
                         width: 64, height: 64,
-                        border: '1px solid rgba(30,30,28,0.14)',
-                        background: '#DFDCD7',
+                        border: '1px solid var(--color-rule)',
+                        background: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / 0.16)`,
                         flexShrink: 0,
                     }}
                 >
@@ -151,10 +166,10 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                         <img src={p.image} alt="" className="w-full h-full object-cover" />
                     ) : (
                         <span
-                            className="font-mono opacity-30"
-                            style={{ fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                            className="font-display italic"
+                            style={{ fontSize: 30, color: `rgb(var(${TINT[p.category] ?? '--c-teal'}) / 0.8)` }}
                         >
-                            {p.category.slice(0, 3)}
+                            {p.title.charAt(0)}
                         </span>
                     )}
                 </div>
@@ -217,6 +232,6 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     <span className="opacity-70 hidden sm:inline">{p.status}</span>
                 </div>
             </div>
-        </a>
+        </div>
     );
 }

@@ -1,0 +1,12 @@
+---
+interface Props {
+    a: { year: string; title: string };
+}
+const { a } = Astro.props;
+---
+
+<div class="ledger-row" style="grid-template-columns: 56px 1fr;">
+    <span class="font-mono text-[11px] opacity-70"
+          style="font-variant-numeric: tabular-nums;">{a.year}</span>
+    <span class="font-display font-medium" style="font-size: 18px;">{a.title}</span>
+</div>

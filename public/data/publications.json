@@ -27,7 +27,7 @@
     "year": "2022",
     "venue": "Structural and Multidisciplinary Optimization",
     "doi": "",
-    "url": ""
+    "url": "https://arxiv.org/abs/2112.00648"
   },
   {
     "key": "chan2022data",
@@ -35,7 +35,7 @@
     "title": "Data-Driven and Diversity-Enhanced Design of Heterogeneous Multiscale Structures",
     "authors": "Chan Y",
     "year": "2022",
-    "venue": "",
+    "venue": "DISSERTATION",
     "doi": "",
     "url": ""
   },
@@ -48,16 +48,6 @@
     "venue": "Journal of Mechanical Design",
     "doi": "",
     "url": "https://doi.org/10.1115/1.4048629"
-  },
-  {
-    "key": "Wang2020lb",
-    "type": "article",
-    "title": "Data-driven metamaterial design with Laplace-Beltrami spectrum as “shape-DNA”",
-    "authors": "Liwei Wang, Yu-Chin Chan, Zhao Liu, Ping Zhu, Wei Chen",
-    "year": "2020",
-    "venue": "Structural and Multidisciplinary Optimization",
-    "doi": "10.1007/s00158-020-02523-5",
-    "url": "https://doi.org/10.1007/s00158-020-02523-5"
   },
   {
     "key": "wang2020deep",

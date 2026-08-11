@@ -226,6 +226,75 @@ html.dark {
         --tw-prose-quotes:        var(--color-ink-soft);
         --tw-prose-quote-borders: var(--color-teal);
     }
+
+    /* Resource pill (Paper / Repo / Demo) — mirrors .pill grammar */
+    .resource-pill {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 11px;
+        border: 1px solid var(--color-rule-strong);
+        background: transparent;
+        color: var(--color-ink);
+        transition: all 120ms;
+        text-decoration: none;
+    }
+    .resource-pill:hover {
+        border-color: var(--color-ink);
+        background: var(--color-paper-soft);
+    }
+
+    /* Project-detail metadata grid — auto-fit on desktop, stacked below 480px */
+    .meta-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    .meta-cell {
+        padding: 18px 20px;
+    }
+    .meta-cell:not(:last-child) {
+        border-right: 1px solid var(--color-rule);
+    }
+    @media (max-width: 479px) {
+        .meta-grid { grid-template-columns: 1fr; }
+        .meta-cell { padding: 14px 4px; }
+        .meta-cell:not(:last-child) {
+            border-right: none;
+            border-bottom: 1px solid var(--color-rule);
+        }
+    }
+
+    /* <details> disclosure in the ledger grammar (native, zero-JS) */
+    .ledger-more {
+        border-top: 1px solid var(--color-rule);
+    }
+    .ledger-more summary {
+        cursor: pointer;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.65;
+        padding: 14px 0 6px;
+        list-style: none;
+        user-select: none;
+        transition: opacity 150ms;
+    }
+    .ledger-more summary:hover { opacity: 1; }
+    .ledger-more summary::-webkit-details-marker { display: none; }
+    .ledger-more summary::before { content: '↓ '; }
+    .ledger-more[open] summary::before { content: '↑ '; }
+
+    /* Larger touch targets on coarse pointers */
+    @media (pointer: coarse) {
+        .pill, .resource-pill, .nav-item {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+    }
 }
 
 /* --- Utilities --------------------------------------------- */

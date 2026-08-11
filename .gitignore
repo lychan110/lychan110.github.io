@@ -11,6 +11,7 @@ dist/
 .claude/settings.json
 .remember/
 .superpowers/
+.impeccable/
 portfolio-scaffold/
 design_handoff_portfolio/
 .logs/
