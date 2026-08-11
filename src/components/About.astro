@@ -100,7 +100,9 @@ const STATUS_SYMBOL: Record<string, string> = {
                     class="font-display italic leading-[1.35] text-ink/88 max-w-[680px]"
                     style="font-size: 24px;"
                 >
-                    {bio[0]}
+                    {bio[0].split(/\*(.*?)\*/).map((seg, i) =>
+                        i % 2 === 1 ? <em class="text-teal">{seg}</em> : seg
+                    )}
                 </p>
             )}
             <!-- Body paragraphs -->

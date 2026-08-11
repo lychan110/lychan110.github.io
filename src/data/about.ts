@@ -4,7 +4,7 @@
 
 export const bio: string[] = [
     // 'Research scientist working at the intersection of deep learning, physics-based simulation, and engineering design. PhD from Northwestern in computational metamaterials; now building AI and simulation workflows for industrial design problems.',
-    'Researcher at heart, always dissecting systems, patterns, and behavior with curiosity and precision. Shaping workflows, tools, and creative projects until they feel uniquely mine.',
+    'Researcher at heart, always dissecting *systems*, patterns, and behavior with curiosity and precision. Shaping workflows, tools, and creative projects until they feel uniquely mine.',
     'Outside work: volunteering, tinkering with code, and dreaming of better worlds.',
     // 'Outside work: I help craft experiences that bring people together, blending structure, culture, and imagination into the spaces I care about.'
 ];
