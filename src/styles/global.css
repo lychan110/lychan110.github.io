@@ -214,12 +214,12 @@ html.dark {
     /* Projects ledger — responsive column grid */
     .project-ledger-row {
         display: grid;
-        grid-template-columns: 28px 1fr auto auto;
+        grid-template-columns: 28px minmax(0, 1fr) auto;
         gap: 12px;
     }
     @media (min-width: 768px) {
         .project-ledger-row {
-            grid-template-columns: 36px 72px 2fr 1fr 60px 100px;
+            grid-template-columns: 36px 72px minmax(0, 1fr) auto;
             gap: 20px;
         }
     }

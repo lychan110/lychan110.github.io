@@ -25,9 +25,7 @@ const HEADERS = [
     { label: '№',      mobile: true  },
     { label: '',       mobile: false }, // thumbnail col
     { label: 'TITLE',  mobile: true  },
-    { label: 'TAGS',   mobile: false },
-    { label: 'YEAR',   mobile: true  },
-    { label: 'STATUS', mobile: true  },
+    { label: 'META',   mobile: true  }, // year over status, right-aligned
 ] as const;
 
 const STATUS_SYMBOL: Record<string, { symbol: string; color: string }> = {
@@ -59,7 +57,7 @@ export default function ProjectGrid({ projects }: Props) {
         <div>
             {/* ── Filter bar ── */}
             <div
-                className="flex items-center gap-2 py-[20px] border-b"
+                className="flex flex-wrap items-center gap-2 py-[20px] border-b"
                 style={{ borderTop: '1px solid var(--color-ink)', borderBottom: '1px solid var(--color-rule)' }}
             >
                 <span
@@ -93,10 +91,17 @@ export default function ProjectGrid({ projects }: Props) {
                 {HEADERS.map(({ label, mobile }) => (
                     <span
                         key={label || 'thumb'}
-                        className={`font-mono opacity-50${mobile ? '' : ' hidden md:block'}`}
+                        className={`font-mono opacity-50${label === 'META' ? ' text-right' : ''}${mobile ? '' : ' hidden md:block'}`}
                         style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                     >
-                        {label}
+                        {label === 'META' ? (
+                            <>
+                                <div>YEAR</div>
+                                <div>STATUS</div>
+                            </>
+                        ) : (
+                            label
+                        )}
                     </span>
                 ))}
             </div>
@@ -178,7 +183,7 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                 <div className="min-w-0">
                     <div
                         className="font-display font-medium row-title leading-[1] mb-[6px]"
-                        style={{ fontSize: 30, letterSpacing: '-0.3px' }}
+                        style={{ fontSize: 24, letterSpacing: '-0.3px' }}
                     >
                         {p.title}
                     </div>
@@ -188,6 +193,17 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     >
                         {p.summary}
                     </div>
+                    {/* Tags — inline mono line (replaces the standalone column) */}
+                    {p.tags.length > 0 && (
+                        <div
+                            className="font-mono opacity-60 mt-[8px]"
+                            style={{ fontSize: 10, lineHeight: 1.6, letterSpacing: '0.05em' }}
+                        >
+                            {p.tags.map(t => (
+                                <span key={t} className="mr-[12px]">#{t}</span>
+                            ))}
+                        </div>
+                    )}
                     {/* Resource links */}
                     {links.length > 0 && (
                         <div className="flex gap-2 mt-[8px]">
@@ -207,29 +223,24 @@ function LedgerRow({ project: p, index }: { project: Project; index: number }) {
                     )}
                 </div>
 
-                {/* Tags — hidden on mobile */}
+                {/* Meta block — year over status, right-aligned */}
                 <div
-                    className="hidden md:block font-mono opacity-75"
-                    style={{ fontSize: 10, lineHeight: 1.7, letterSpacing: '0.05em' }}
+                    className="flex flex-col items-end gap-[8px] min-w-0"
+                    style={{ paddingTop: 6 }}
                 >
-                    {p.tags.map(t => <div key={t}>#{t}</div>)}
-                </div>
-
-                {/* Year */}
-                <span
-                    className="font-mono pt-[6px]"
-                    style={{ fontSize: 12, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.1em' }}
-                >
-                    {year}
-                </span>
-
-                {/* Status */}
-                <div
-                    className="font-mono flex items-center gap-[6px] pt-[6px]"
-                    style={{ fontSize: 11 }}
-                >
-                    <span style={{ color: status.color }}>{status.symbol}</span>
-                    <span className="opacity-70 hidden sm:inline">{p.status}</span>
+                    <span
+                        className="font-mono"
+                        style={{ fontSize: 12, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.1em' }}
+                    >
+                        {year}
+                    </span>
+                    <span
+                        className="font-mono flex items-center gap-[6px]"
+                        style={{ fontSize: 11 }}
+                    >
+                        <span style={{ color: status.color }}>{status.symbol}</span>
+                        <span className="opacity-70 hidden sm:inline">{p.status}</span>
+                    </span>
                 </div>
             </div>
         </div>
