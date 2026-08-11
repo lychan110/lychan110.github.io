@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
+import RunningHead from '../../components/RunningHead.astro';
 import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
@@ -37,6 +38,8 @@ const statusColor  = { complete: '#1E1E1C', ongoing: '#2E8CA6', archived: '#6B67
 >
     <Nav current="projects" />
     <main>
+
+        <RunningHead />
 
         <!-- Breadcrumb -->
         <div class="px-page pt-[24px]">
