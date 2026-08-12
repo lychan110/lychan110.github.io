@@ -20,27 +20,27 @@
     --color-rule:        rgba(28, 28, 30, 0.16);
     --color-rule-strong: rgba(28, 28, 30, 0.28);
     --link:          var(--color-teal-deep);
-    --color-nav-bg:          rgba(237, 229, 214, 0.92);
+    --color-nav-bg:          rgba(232, 230, 225, 0.92);
     --color-masthead-overlay: rgba(232, 230, 225, 0.88);
     --pad: 72px;
     --swatch-alpha: 0.20;
 
     /* RGB channels for Tailwind opacity utilities (text-ink/88 etc).
        Must stay in sync with --color-* hex values above. */
-    --c-ink:        30 26 20;
-    --c-ink-soft:   58 54 50;
-    --c-paper:      237 229 214;
-    --c-paper-deep: 226 216 196;
-    --c-paper-soft: 245 238 223;
+    --c-ink:        28 28 30;
+    --c-ink-soft:   56 54 58;
+    --c-paper:      232 230 225;
+    --c-paper-deep: 222 220 215;
+    --c-paper-soft: 240 238 234;
     --c-teal:       18 137 172;
     --c-teal-pale:  140 193 219;
     --c-teal-deep:  31 107 128;
-    --c-muted:      94 89 83;
+    --c-muted:      92 90 88;
     --c-interactive: 154 36 56;
     --c-coral:      216 138 115;
     --c-ochre:      201 169 97;
     --c-sage:       159 183 155;
-    --c-rust:       181 89 60;
+    --c-rust:       165 72 37;
 }
 
 /* --- Design tokens: dark ---------------------------------- */
@@ -98,6 +98,12 @@ html.dark {
     ::selection {
         background-color: var(--color-teal);
         color: var(--color-paper);
+    }
+
+    /* Visible keyboard focus on every interactive control (WCAG 2.4.7). */
+    :focus-visible {
+        outline: 2px solid var(--color-interactive);
+        outline-offset: 2px;
     }
 
     ::-webkit-scrollbar        { width: 6px; }
@@ -263,18 +269,7 @@ html.dark {
         height: 10px;
         margin-right: 12px;
         vertical-align: baseline;
-        background: var(--marker, rgba(30, 26, 20, 0.12));
-    }
-
-    /* Publications ledger: quiet type-keyed tint marker before the title (catalog DNA). */
-    .pub-row-marker::before {
-        content: '';
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        margin-right: 12px;
-        vertical-align: baseline;
-        background: var(--marker, rgba(30, 26, 20, 0.12));
+        background: var(--marker, rgba(28, 28, 30, 0.12));
     }
 
     /* Resource pill (Paper / Repo / Demo) — mirrors .pill grammar */
