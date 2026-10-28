@@ -1,27 +1,13 @@
 # Repo context for Claude
 
-Personal mini-CV / portfolio site served from `lychan110.github.io` (GitHub Pages via GitHub Actions). Content grows organically, fed by Claude from two Obsidian vaults at `C:\Users\lycha\Desktop\projects\Obsidian`:
+Repo facts (stack, dev server, deploy) live in `AGENTS.md` — this file keeps only what that one does not: content schemas and editing conventions.
+
+Content comes from two Obsidian vaults at `C:\Users\lycha\Desktop\projects\Obsidian`:
 
 - **Personal vault** ("Lenya's brain") — freely publishable.
-- **Work vault** — IP-bearing. Content from here MUST be scrubbed before it enters this repo. Never commit anything from the work vault without the `ip-scrubber` subagent having passed on it.
+- **Work vault** — IP-bearing. Content from here MUST be scrubbed before it enters this repo. Nothing from the work vault enters this repo until the `ip-scrubber` subagent has passed on it.
 
-## Stack
-
-**Astro 4** (static site) + **Tailwind CSS** + **React** (islands only, for interactivity) + **MDX** (project content) + **GitHub Actions** (build + deploy to GitHub Pages).
-
-- `astro.config.mjs`, `tailwind.config.mjs`, `tsconfig.json` — framework config
-- `src/pages/` — routes (`index.astro`, `projects.astro`, `projects/[slug].astro`)
-- `src/components/` — `.astro` components and one `.tsx` React island (`ProjectGrid.tsx` for the filterable project grid + modal)
-- `src/layouts/Base.astro` — page shell
-- `src/styles/global.css` — Tailwind + custom utilities + font declarations
-- `src/content/projects/*.mdx` — one project per MDX file, schema enforced by `src/content/config.ts`
-- `src/data/about.ts` — bio, education, awards, experience, talks (typed data)
-- `src/assets/ychan_pubs.bib` — BibTeX, parsed at build by `scripts/parse-bib.js` into `public/data/publications.json`
-- `public/` — static assets served as-is (images, favicon, generated JSON)
-
-Build: `npm run build` (runs `parse-bib.js` → `astro build`). Dev: `npm run dev` (Astro dev server with HMR on :4321). Preview via the `dev` config in `.claude/launch.json` — always use `preview_start`, not Bash, to run it.
-
-**No jQuery, no Bootstrap, no SCSS, no Pug.** React is used ONLY where the page needs client-side interactivity (the project grid filter + modal). Everything else is static Astro.
+**No jQuery, no Bootstrap, no SCSS, no Pug.** React is used only where the page needs client-side interactivity (the project grid filter + modal). Everything else is static Astro.
 
 ## Content schemas
 

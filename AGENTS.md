@@ -1,12 +1,9 @@
 # Agent instructions for lychan110.github.io (portfolio)
 
 ## Approach
-- Read existing files before writing. Do not re-read unless content changed.
-- Thorough in reasoning, concise in output.
 - Skip files over 100KB unless required.
-- No sycophantic openers or closing fluff.
-- No emojis or em-dashes.
-- Do not guess APIs, versions, flags, commit SHAs, or package names. Verify by reading code or docs first.
+- Verify APIs, versions, flags, commit SHAs, and package names by reading code or docs before using them.
+- Plain ASCII prose, hyphens rather than em-dashes, no emoji.
 
 ## Project context
 - **Type:** Astro 4 static site + Tailwind + React (islands only).
