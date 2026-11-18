@@ -1,5 +1,7 @@
 # Agent instructions for lychan110.github.io (portfolio)
 
+> **Three layers:** root invariants → `central-brain/global-instructions/AGENTS.md` · role → `~/.hermes/agents/sabine-wren.md` · scope = this file (repo-mechanical facts only: Astro/Tailwind setup, publish pipeline, never-commit list).
+
 ## Approach
 - Skip files over 100KB unless required.
 - Verify APIs, versions, flags, commit SHAs, and package names by reading code or docs before using them.
