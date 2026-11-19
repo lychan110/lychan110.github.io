@@ -1,0 +1,26 @@
+# Normalize text files to LF in the repository and in checkouts.
+#
+# The 26 files this replaces were committed with CRLF (two of them mixed),
+# which made every checkout differ from the committed bytes on Linux and gave
+# Windows checkouts a second round of CRLF conversion on top. `text=auto`
+# lets git detect binary files itself; `eol=lf` pins text files to LF on
+# every platform.
+* text=auto eol=lf
+
+# Binary assets: never touched by the text filter.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.mp4 binary
+*.webm binary
+*.zip binary
+*.gz binary
+*.pdf binary
